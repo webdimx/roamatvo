@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Fatura 123</title>
+    <meta charset="iso-8859-1"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+<style>
+  body{font-family: 'Open Sans', sans-serif;font-size: 13px;color: #6E6E6E;line-height: 5px;}
+  h1{font-size: 13px;margin-bottom: 30px;}
+  h2{font-size: 12px;}
+  p{line-height:30px;display: inline-block;}
+</style>
+
+<table  align="center" border="0">
+  <thead>
+    <tr>
+      <td style="background: #2c5197;padding: 0px;">
+
+        <table width="100%">
+          <tr>
+            <td style="padding:15px">
+              <table width="100%"  style="color:#e6e6e6;" >
+                <tr>
+                  <td style="background: #2c5197"  style="width: 300px;">
+                    <img src="https://www.skillsim.com/images/logotipo.png" width="100px;height:auto">
+                  </td>
+                  <td width="120" align="left" style="background: #224079;padding: 10px;">
+
+                   <p style="font-size:12px"><strong>DATA DE EMISSÃO</strong></p>
+                   <p>{data}</p>
+                 </td>
+                 <td width="20" style="background: #2c5197">
+                 </td>
+                 <td width="120"  align="left"  style="background: #224079;padding: 10px;">
+                   <p  style="font-size:12px"><strong>VALOR</strong></p>
+                   <p>R${valor}</p>
+                 </td>
+                </tr>
+               </table>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 0;">
+       <table width="100%"  style="margin-top: 20px">
+        <tr>
+          <td style="background: #f4f4f4; padding: 20px;">
+            <h1>DADOS DO CLIENTE</h1>
+            <p style="font-size:6px">&nbsp;</p>
+            <p style="line-height: 30px; "><strong>Nome:</strong> {nome}</p>
+            <p style="font-size:6px">&nbsp;</p>
+            <p style="line-height: 30px; "><strong>CPF/CNPJ:</strong> {documento}</p>
+            <p style="font-size:6px">&nbsp;</p>
+            <p style="line-height: 30px; "><strong>Email:</strong> {email}</p>
+          </td>
+        </tr>
+       </table>
+       </td>
+    </tr>
+    <tr>
+      <td style="padding: 0">
+        <table width="100%" style="margin: 20px 0px 0 0">
+          <tr>
+            <td style="background: #f4f4f4; padding: 20px;">
+              <h1>RESUMO DA FATURA</h1>
+              <p>&nbsp;</p>
+              <p><strong>Código da Fatura</strong>: {maskCode}</p>
+              <p style="font-size:6px">&nbsp;</p>
+              <p><strong>Descrição:</strong></p>
+              <p style="font-size:6px">&nbsp;</p>
+              <p>Aluguel por {dias} dias de acesso a internet rede internacional</p>
+            </td>
+          </tr>
+         </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0;">
+
+        <table width="100%" style="background: #f4f4f4;border-top:#b8b6b6 2px solid">
+          <tr>
+            <td style="background: #f4f4f4; padding: 20px;">
+              <strong>Valor</strong>
+            </td>
+            <td style="background: #f4f4f4; padding: 20px;" align="right">
+              R${valor}
+            </td>
+          </tr>
+         </table>
+
+      </td>
+
+    </tr>
+    <tr>
+      <td  align="center" style="padding:30px 30px">
+        <p style="font-size:12px">Segundo a lei complementar nº 116, de 31 de julho de 2003, a locação de bens imóveis ou móveis e equipamentos/sistema/dispositivo de acesso à internet consiste em operação não sujeita a emissão da NFe. (Súmula 31 do Supremo Tribunal Federal)</p>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td >
+        <table width="110%" style="margin: 20px 0px">
+          <tr>
+            <td>
+              <h2 style="margin: 5px 0">SKILLED LOCAFACIL</h2>
+              <p><strong>CNPJ:</strong> {cnpj}</p>
+            </td>
+            <td align="right">
+              <p>financeiro@skllsim.com</p>
+              <p>www.skillsim.com</p>
+            </td>
+          </tr>
+         </table>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+</body>
+</html>

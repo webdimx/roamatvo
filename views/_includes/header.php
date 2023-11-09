@@ -1,0 +1,289 @@
+<?php if ( ! defined('ABSPATH')) exit; ?>
+<? 
+
+$user = $this->getUserInfo(); ?>
+<script>
+
+ajaxUrl = '<?=HOME_URI?>'
+controllerUrl = '<?=HOME_URI.$this->controller?>/'
+subController = '<?=$this->subController?>'
+ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
+
+
+</script>
+
+<?
+	
+?>
+<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				
+				
+				<div class="navbar-header pull-left">
+				<div class=" hidden-sm hidden-lg" style="    line-height: 20px;
+    padding: 10px;
+    color: #fff;
+    text-align: center;float:left ">Sistema de Gerenciamento VoiceWay</div>	
+					
+					<button class="pull-right navbar-toggle" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">
+						<span class="sr-only">Toggle sidebar</span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+					</button>
+					<?
+					
+					
+						
+					if($_SESSION['userdata']['type']==2):
+					?>
+					<button class="pull-right navbar-toggle" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">
+						<span class="sr-only">Toggle sidebar</span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+					</button>
+					<?
+					if($this->sideMin):
+					?>
+					<button data-target="#sidebar2" data-toggle="collapse" type="button" class="pull-right navbar-toggle" aria-expanded="true">
+										<span class="sr-only">Toggle sidebar</span>
+
+										<i class="ace-icon fa fa-play-circle-o white bigger-180"></i>
+									</button>
+					<?
+					endif;
+					endif;
+					?>
+</div>
+
+
+
+
+<div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
+<ul class="nav ace-nav">
+
+<?  if($_SESSION['userdata']['type']!=2): ?>
+
+						
+						<? endif; ?>
+	
+<li class="blue dropdown-modal ">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+								
+								<span class="badge badge-important">Ações Rápidas</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								
+
+								<li class="dropdown-content ace-scroll" style="position: relative;"><div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="">
+									<ul class="dropdown-menu dropdown-navbar navbar-pink">
+										<li>
+											<a href="<?=HOME_URI?>transacoes/adicionar">
+												<div class="clearfix">
+													<span class="pull-left">
+														Nova Transação
+													</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#modal-recharge" class="" data-toggle="modal" >
+												<div class="clearfix">
+													<span class="pull-left">
+														Recarga
+													</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#modal-swap" class="gswap" data-toggle="modal" data-tipo="1">
+												Gerar Swap de Ativação
+											</a>
+										</li>
+
+										<li>
+											<a  href="#modal-swap" class="gswap" data-toggle="modal" data-tipo="2">
+												<div class="clearfix">
+													<span class="pull-left">
+														Gerar Swap de Desativação
+													</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="<?=HOME_URI?>cadastros/simcard" >
+												<div class="clearfix">
+													<span class="pull-left">
+													Pesquisar ou Cadastrar um SIMCARD
+													</span>
+												</div>
+											</a>
+										</li>
+
+										<!--<li>
+											<a href="#modal-import-lote" class="ic" data-toggle="modal" data-type="2">
+												<div class="clearfix">
+													<span class="pull-left">
+														Cadastro SIMCARD
+													</span>
+												</div>
+											</a>
+										</li>
+										
+										<li>
+											<a href="#modal-import-lote" class="ic" data-toggle="modal" data-type="1">
+												<div class="clearfix">
+													<span class="pull-left">
+														Cadastro MDN
+													</span>
+												</div>
+											</a>
+										</li>-->							
+										<li>
+											<a  href="#modal-import-lote" class="ic" data-toggle="modal"  data-type="3">
+												<div class="clearfix">
+													<span class="pull-left">
+														Cadastro MDN/SIMCARD
+													</span>
+												</div>
+											</a>
+										</li>
+										
+										<li>
+											<a href="<?=HOME_URI?>/cadastros/envios_simcard" class=""  >
+												<div class="clearfix">
+													<span class="pull-left">
+														Envio de SIM para local de Venda
+													</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#modal-change-status" class="" data-toggle="modal" >
+												<div class="clearfix">
+													<span class="pull-left">
+														Mudar Status de MDN
+													</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div></li>
+
+								
+							</ul>
+						</li>
+	
+
+	
+<li class="blue dropdown-modal">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+								<i class="ace-icon fa fa-bell"></i>
+								<span class="badge badge-important"><?=($model->notify?$model->notify:'')?></span>
+							</a>
+
+						    <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-exclamation-triangle"></i>
+									Notificações
+								</li>
+
+								<li class="dropdown-content ace-scroll" style="position: relative;"><div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="">
+									<ul class="dropdown-menu dropdown-navbar navbar-blue">
+										
+										<?
+										if($model->notify):
+										?>
+										<li>
+											<a href="<?=HOME_URI?>/relatorios/ocorrencias">
+												<div class="clearfix">
+													<span class="pull-left">
+														Ocorrências
+													</span>
+													<span class="pull-right badge badge-success"><?=$model->notify?></span>
+												</div>
+											</a>
+										</li>
+                                        <?
+                                        endif;
+                                        ?>
+									
+
+									</ul>
+								</div></li>
+
+								
+							</ul>
+						</li>
+	
+<li class="light-blue dropdown-modal ">
+  <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+      <span class="user-info">
+          <i class="fa fa-user-circle-o" style="
+    font-size: 20px;
+"></i>
+      </span>
+
+      <i class="ace-icon fa fa-caret-down"></i>
+  </a>
+
+  <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+      
+
+      <?
+    if($_SESSION[userdata][type]):
+    ?>
+    <li>
+        <a href="<?php echo HOME_URI;?>usuarios/editar/">
+            <i class="ace-icon fa fa-user"></i>
+            Editar Perfil
+        </a>
+    </li>
+    <?
+    endif;
+    ?>
+    <li>
+        <a href="<?php echo HOME_URI;?>logout">
+            <i class="ace-icon fa fa-power-off"></i>
+            Sair
+        </a>
+    </li>
+  </ul>
+</li>
+</ul>
+</div>
+
+<nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+      <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <?=($_SESSION['userdata']['type']==2?'Área do aluno':'Sistema de Gerenciamento VoiceWay')?>
+&nbsp;
+              
+          </a>
+      </li>
+	  <li>
+		<span class="input-icon input-icon-right">  
+	  	<input type="search" class="search filter" name="search" placeholder="Pesquise pelo Cliente, MDN ou SIMCARD">
+		  <div class="ui-widget-content"></div>
+		<i class="ace-icon fa fa-close" onClick="$(this).parents('li').find('.search').val('')"></i>
+		</span>	
+	  </li>	
+      
+  </ul>
+ 
+</nav>
+</div>
+</div>

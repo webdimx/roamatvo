@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Table Generator</title>
+    <style>
+      strong {font-size: 13px;}
+      table {
+        border: 1px solid #b3adad;
+        border-collapse: collapse;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      table th {
+        border: 1px solid #b3adad;
+        padding: 5px;
+        background: #ade9df;
+        color: #313030;
+      }
+      table td {
+        border: 1px solid #b3adad;
+        text-align: center;
+        padding: 5px;
+        background: #ffffff;
+        color: #313030;
+      }
+      table tr.np td {
+        border: 1px solid #b3adad;
+        text-align: center;
+        padding: 0px;
+        background: #ffffff;
+        color: #313030;
+      }
+      table tr.nb td {
+        border-bottom: 0;
+        text-align: center;
+        padding: 5px;
+        background: #ffffff;
+        color: #313030;
+      }
+    </style>
+  </head>
+  <body>
+    <table style="width: 100%; margin-bottom: 15px;background-color: aquamarine;">
+      <thead>
+        <tr>
+          <th colspan="6" style="width: 80%">
+            RELATÓRIO DIÁRIO - VENDAS AEROPORTOS
+          </th>
+          <th style="width: 20%;color: red;">{date}</th>
+        </tr>
+      </thead>
+    </table>
+
+    <table style="width: 100%;  margin-bottom: 15px">
+      <thead>
+        <tr class="np">
+          <td style="width: 20%"><strong>TERMINAL</td>
+          <td style="width: 10%"><strong>CHIPS</strong></td>
+          <td style="width: 30%">
+            <table style="width: 100%; border: 0">
+              <thead>
+                <tr class="nb">
+                  <td colspan="2" style="border: 0;background-color: #f4f4f4 !important;"; ><strong>CARTÃO</strong></td>
+                </tr>
+                <tr class="nb">
+                  <td style="width:50%;border-left: 0;background-color: #f4f4f4 !important;"><strong>CRÉDITO</strong></td>
+                  <td style="width:50%;border-right: 0;background-color: #f4f4f4 !important;"><strong>DÉBITO</strong></td>
+                </tr>
+              </thead>
+            </table>
+          </td>
+          <td style="width: 40%">
+            <table style="width: 100%; border: 0">
+              <thead>
+                <tr class="nb">
+                  <td colspan="3" style="border: 0; background-color: #e8e8e8 !important"><strong>MOEDA</strong></td>
+                </tr>
+                <tr class="nb">
+                  <td style="border-left: 0;background-color: #e8e8e8 !important;"><strong>REAL</strong></td>
+                  <td style="background-color: #e8e8e8  !important;"><strong>DÓLAR</strong></td>
+                  <td style="border-right: 0;background-color: #e8e8e8  !important;"><strong>EURO</strong></td>
+                </tr>
+              </thead>
+            </table>
+          </td>
+        </tr>
+      </thead>
+    </table>
+
+    {table}
+</html>
