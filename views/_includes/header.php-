@@ -1,5 +1,5 @@
 <?php if ( ! defined('ABSPATH')) exit; ?>
-<? 
+<?
 
 $user = $this->getUserInfo(); ?>
 <script>
@@ -10,18 +10,18 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 </script>
 
 <?
-	
+
 ?>
 <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
-				
-				
+
+
 				<div class="navbar-header pull-left">
 				<div class=" hidden-sm hidden-lg" style="    line-height: 20px;
     padding: 10px;
     color: #fff;
-    text-align: center;float:left ">Sistema de Gerenciamento VoiceWay</div>	
-					
+    text-align: center;float:left ">Sistema de Gerenciamento RoamAtvo</div>
+
 					<button class="pull-right navbar-toggle" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">
 						<span class="sr-only">Toggle sidebar</span>
 
@@ -32,9 +32,9 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 						<span class="icon-bar"></span>
 					</button>
 					<?
-					
-					
-						
+
+
+
 					if($_SESSION['userdata']['type']==2):
 					?>
 					<button class="pull-right navbar-toggle" type="button" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">
@@ -68,17 +68,17 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 
 <?  if($_SESSION['userdata']['type']!=2): ?>
 
-						
+
 						<? endif; ?>
-	
+
 <li class="blue dropdown-modal ">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
-								
+
 								<span class="badge badge-important">Ações Rápidas</span>
 							</a>
 
 							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-								
+
 
 								<li class="dropdown-content ace-scroll" style="position: relative;"><div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="">
 									<ul class="dropdown-menu dropdown-navbar navbar-pink">
@@ -117,7 +117,7 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 												</div>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="#modal-import-lote" class="ic" data-toggle="modal" data-type="1">
 												<div class="clearfix">
@@ -127,7 +127,7 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 												</div>
 											</a>
 										</li>
-										
+
 										<li>
 											<a  href="#modal-import-lote" class="ic" data-toggle="modal"  data-type="3">
 												<div class="clearfix">
@@ -137,7 +137,7 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 												</div>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?=HOME_URI?>/cadastros/envios_simcard" class=""  >
 												<div class="clearfix">
@@ -160,12 +160,12 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 									</ul>
 								</div></li>
 
-								
+
 							</ul>
 						</li>
-	
 
-	
+
+
 <li class="blue dropdown-modal open">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
 								<i class="ace-icon fa fa-bell"></i>
@@ -205,10 +205,10 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
 									</ul>
 								</div></li>
 
-								
+
 							</ul>-->
 						</li>
-	
+
 <li class="light-blue dropdown-modal ">
   <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
       <span class="user-info">
@@ -221,7 +221,7 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
   </a>
 
   <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-      
+
 
       <?
     if($_SESSION[userdata][type]):
@@ -250,21 +250,21 @@ ignoreRequired=<?=($this->ignoreRequired)?"true":"''"?>;
   <ul class="nav navbar-nav">
       <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <?=($_SESSION['userdata']['type']==2?'Área do aluno':'Sistema de Gerenciamento VoiceWay')?>
+              <?=($_SESSION['userdata']['type']==2?'Área do aluno':'Sistema de Gerenciamento RoamAtvo')?>
 &nbsp;
-              
+
           </a>
       </li>
 	  <li>
-		<span class="input-icon input-icon-right">  
+		<span class="input-icon input-icon-right">
 	  	<input type="search" class="search filter" name="search" placeholder="Pesquise pelo Cliente, MDN ou SIMCARD">
 		  <div class="ui-widget-content"></div>
 		<i class="ace-icon fa fa-close" onClick="$(this).parents('li').find('.search').val('')"></i>
-		</span>	
-	  </li>	
-      
+		</span>
+	  </li>
+
   </ul>
- 
+
 </nav>
 </div>
 </div>
