@@ -20,7 +20,8 @@ class RelatoriosModel extends MainController
 	public $db;
 
 
-	public function __construct( $db = false ) {
+	public function __construct($db = false)
+	{
 
 		$this->db = $db;
 		$this->table = 'wd_financeiro';
@@ -32,15 +33,16 @@ class RelatoriosModel extends MainController
 
 
 
-	public function SellReport($tipo){
+	public function SellReport($tipo)
+	{
 
-		if($tipo=='site'):
+		if ($tipo == 'site'):
 
-			 $qs .= "a.origem = '1' and ";
+			$qs .= "a.origem = '1' and ";
 
 		else:
 
-			 $qs .= "a.origem = '2' and ";
+			$qs .= "a.origem = '2' and ";
 
 		endif;
 
@@ -48,139 +50,139 @@ class RelatoriosModel extends MainController
 
 		unset($_GET[path], $_GET[p]);
 
-		if($_GET[sedex]=='0'):
+		if ($_GET[sedex] == '0'):
 
-			$qs .= str_replace('|','.', 'sedex')." = '".$_GET[sedex]."' and ";
+			$qs .= str_replace('|', '.', 'sedex') . " = '" . $_GET[sedex] . "' and ";
 
 		endif;
 
-		foreach($_GET as $key => $search):
+		foreach ($_GET as $key => $search):
 
-		  if($search){
+			if ($search) {
 
-		  switch($key):
-
-
-		  	case"ID":
-		  	  $qs .= str_replace('|','.', $key)." = '".$search."' and ";
-		  	break;
+				switch ($key):
 
 
-
-			case"x|atendente":
-
-				$qs .= str_replace('|','.', $key)." = '".$search."' and ";
-
-		  	break;
-
-			case"valor_total":
-
-				$qs .=  $key." = '".formatMoney($search)."' and ";
-
-		  	break;
-
-			 case"data_compra":
-
-			  	$search = explode('-', $search);
-
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
-
-		  	break;
-
-			case"data_retirada":
-
-			  	$search = explode('-', $search);
-
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
-
-		  	break;
-
-			case"valor_base":
-
-				$qs .=  $key." = '".formatMoney($search)."' and ";
-
-		  	break;
-
-			case"valor_frete":
-
-				$qs .=  $key." = '".formatMoney($search)."' and ";
-
-		  	break;
-
-			case"valor_venda":
-
-				$qs .=  "format(valor_frete/a.valor_dolar,2, 'en_US') = '".formatMoney($search)."' and ";
-
-		  	break;
+					case "ID":
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
+						break;
 
 
 
+					case "x|atendente":
 
-			case"a|valor_dolar":
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
 
-				$qs .=  str_replace('|','.', $key)." = '".formatMoney($search)."' and ";
+						break;
 
-		  	break;
+					case "valor_total":
 
-			case"valor_total":
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-				$qs .=  $key." = '".formatMoney($search)."' and ";
+						break;
 
-			break;
+					case "data_compra":
 
-			case"valor_base_real":
+						$search = explode('-', $search);
 
-			   $qs .=  "(valor_base*a.valor_dolar)  = '".formatMoney($search)."' and ";
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-			break;
+						break;
 
-			case"ponto_entrega":
+					case "data_retirada":
 
-				$qs .=  $key." = '".$search."' and ";
+						$search = explode('-', $search);
 
-		  	break;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-			case"status_compra":
+						break;
 
-				$qs .=  $key." = '".$search."' and ";
+					case "valor_base":
 
-		  	break;
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-			case"resgatado":
+						break;
 
-				$qs .=  $key." = '".$search."' and ";
+					case "valor_frete":
 
-		  	break;
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-			case"resgatado":
+						break;
 
-				$qs .=  $key." = '".$search."' and ";
+					case "valor_venda":
 
-		  	break;
+						$qs .= "format(valor_frete/a.valor_dolar,2, 'en_US') = '" . formatMoney($search) . "' and ";
 
-			case"vendedor":
-
-				$qs .=  $key.(strtolower($search)=='site'?' is null and ':" like '%".trim($search)."%' and ");
-
-		  	break;
+						break;
 
 
 
-			default:
-			  $qs .= str_replace('|','.', $key)." like '%".trim($search)."%' and ";
-		  	break;
 
-		  endswitch;
+					case "a|valor_dolar":
 
-		  }
+						$qs .= str_replace('|', '.', $key) . " = '" . formatMoney($search) . "' and ";
+
+						break;
+
+					case "valor_total":
+
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
+
+						break;
+
+					case "valor_base_real":
+
+						$qs .= "(valor_base*a.valor_dolar)  = '" . formatMoney($search) . "' and ";
+
+						break;
+
+					case "ponto_entrega":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "status_compra":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "resgatado":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "resgatado":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "vendedor":
+
+						$qs .= $key . (strtolower($search) == 'site' ? ' is null and ' : " like '%" . trim($search) . "%' and ");
+
+						break;
+
+
+
+					default:
+						$qs .= str_replace('|', '.', $key) . " like '%" . trim($search) . "%' and ";
+						break;
+
+				endswitch;
+
+			}
 
 		endforeach;
 
-		$qs = ($qs)?'where '.substr($qs, 0, -4):'';
+		$qs = ($qs) ? 'where ' . substr($qs, 0, -4) : '';
 
 
 
@@ -197,11 +199,11 @@ class RelatoriosModel extends MainController
 		if(vendedor is null, '', if(a.forma_pagamento!='faturado', format(((if(a.moeda='dolar', (valor_total*a.valor_dolar)-((valor_base*a.valor_dolar)+if(sedex=1, (a.valor_frete), '0.00')), (valor_total)-(valor_base*a.valor_dolar+if(sedex=1, (a.valor_frete), '0.00'))))), 2, 'en_US'), '')) as valor_repasse
 
 
-		FROM wd_vouchers a LEFT JOIN wd_planos b ON a.plano = b.ID LEFT JOIN wd_ponto_de_venda c ON a.ponto_entrega = c.ID LEFT JOIN wd_transacoes x ON a.id_venda = x.id_skillsim left join wd_atendentes y ON x.atendente = y.ID ".$qs." ORDER BY ID DESC ".($page?"LIMIT ".($page - 1) * 20 .",20":"")." ");
+		FROM wd_vouchers a LEFT JOIN wd_planos b ON a.plano = b.ID LEFT JOIN wd_ponto_de_venda c ON a.ponto_entrega = c.ID LEFT JOIN wd_transacoes x ON a.id_venda = x.id_skillsim left join wd_atendentes y ON x.atendente = y.ID " . $qs . " ORDER BY ID DESC " . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . " ");
 
 		$fetch = $query->fetchAll();
 
-		$count = $this->db->query("select * from wd_vouchers a LEFT JOIN wd_planos b ON a.plano = b.ID LEFT JOIN wd_local_de_venda c ON a.ponto_entrega = c.ID LEFT JOIN wd_transacoes x ON a.id_venda = x.id_skillsim left join wd_atendentes y ON x.atendente = y.ID ".$qs." ");
+		$count = $this->db->query("select * from wd_vouchers a LEFT JOIN wd_planos b ON a.plano = b.ID LEFT JOIN wd_local_de_venda c ON a.ponto_entrega = c.ID LEFT JOIN wd_transacoes x ON a.id_venda = x.id_skillsim left join wd_atendentes y ON x.atendente = y.ID " . $qs . " ");
 
 
 		$queryFP = $this->db->query("select forma_pagamento from wd_vouchers group by forma_pagamento ");
@@ -218,16 +220,18 @@ class RelatoriosModel extends MainController
 	}
 
 
-	public function checkNotify(){
+	public function checkNotify()
+	{
 
-	    $query = $this->db->query("SELECT COUNT(*) as total FROM wd_transacoes_erros WHERE iccid_novo IS null");
-	    $data = $query->fetch();
+		$query = $this->db->query("SELECT COUNT(*) as total FROM wd_transacoes_erros WHERE iccid_novo IS null");
+		$data = $query->fetch();
 
-	    return $data[total];
+		return $data['total'];
 	}
 
 
-	public function ReportError(){
+	public function ReportError()
+	{
 
 
 
@@ -237,117 +241,117 @@ class RelatoriosModel extends MainController
 
 		unset($_GET[path], $_GET[p]);
 
-		if($_GET[sedex]=='0'):
+		if ($_GET[sedex] == '0'):
 
-			$qs .= str_replace('|','.', 'sedex')." = '".$_GET[sedex]."' and ";
+			$qs .= str_replace('|', '.', 'sedex') . " = '" . $_GET[sedex] . "' and ";
 
 		endif;
 
-		foreach($_GET as $key => $search):
+		foreach ($_GET as $key => $search):
 
-		  if($search){
+			if ($search) {
 
-		  switch($key):
-
-
-		  	case"ID":
-		  	  $qs .= str_replace('|','.', $key)." = '".$search."' and ";
-		  	break;
-
-			case"email":
-
-				$qs .= str_replace('|','.', $key)." = '".$search."' and ";
-
-		  	break;
-
-			case"valor_total":
-
-				$qs .=  $key." = '".formatMoney($search)."' and ";
-
-		  	break;
-
-			 case"data_compra":
-
-			  	$search = explode('-', $search);
-
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
-
-		  	break;
-
-			case"data_retirada":
-
-			  	$search = explode('-', $search);
-
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
-
-		  	break;
-
-			case"valor_base":
-
-				$qs .=  $key." = '".formatMoney($search)."' and ";
-
-			  break;
+				switch ($key):
 
 
+					case "ID":
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
+						break;
 
-			case"a|valor_dolar":
+					case "email":
 
-				$qs .=  str_replace('|','.', $key)." = '".formatMoney($search)."' and ";
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
 
-		  	break;
+						break;
 
-			case"valor_total":
+					case "valor_total":
 
-				$qs .=  $key." = '".formatMoney($search)."' and ";
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-		  	break;
+						break;
 
-			case"ponto_entrega":
+					case "data_compra":
 
-				$qs .=  $key." = '".$search."' and ";
+						$search = explode('-', $search);
 
-		  	break;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-			case"status_compra":
+						break;
 
-				$qs .=  $key." = '".$search."' and ";
+					case "data_retirada":
 
-		  	break;
+						$search = explode('-', $search);
 
-			case"resgatado":
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-				$qs .=  $key." = '".$search."' and ";
+						break;
 
-		  	break;
+					case "valor_base":
 
-			default:
-			  $qs .= str_replace('|','.', $key)." like '%".trim($search)."%' and ";
-		  	break;
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-		  endswitch;
+						break;
 
-		  }
+
+
+					case "a|valor_dolar":
+
+						$qs .= str_replace('|', '.', $key) . " = '" . formatMoney($search) . "' and ";
+
+						break;
+
+					case "valor_total":
+
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
+
+						break;
+
+					case "ponto_entrega":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "status_compra":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "resgatado":
+
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					default:
+						$qs .= str_replace('|', '.', $key) . " like '%" . trim($search) . "%' and ";
+						break;
+
+				endswitch;
+
+			}
 
 		endforeach;
 
-		$qs = ($qs)?'where '.substr($qs, 0, -4):'';
+		$qs = ($qs) ? 'where ' . substr($qs, 0, -4) : '';
 
 		$query2 = $this->db->query("SELECT * FROM wd_transacoes_erros a where iccid_novo is null  order by a.ID DESC");
 		$fetch2 = $query2->fetchAll();
 
-		foreach($fetch2 as $sim):
+		foreach ($fetch2 as $sim):
 
 
 
 
 			$s = $this->db->query("SELECT * from wd_simcards where simcard = '$sim[iccid]' ");
-		 	$sd = $s->fetch();
+			$sd = $s->fetch();
 
-			if($sd):
+			if ($sd):
 
 				$del = $this->db->delete('wd_transacoes_erros', 'id', $sim[ID]);
 
@@ -384,13 +388,14 @@ class RelatoriosModel extends MainController
 
 
 
-	public function getVoucherSeller($a){
+	public function getVoucherSeller($a)
+	{
 
 		$mysqli2 = new pdo('mysql:host=mysql.skillsim.com;dbname=skillsim02;charset=utf8', 'skillsim02', 'nas9duh198je');
 		$query = $mysqli2->query("select  * from usuarios where id = '$a' ");
 
 
-		if ( ! $query ) {
+		if (!$query) {
 			return array();
 		}
 
@@ -402,13 +407,14 @@ class RelatoriosModel extends MainController
 	}
 
 
-	public function getVoucher($a){
+	public function getVoucher($a)
+	{
 
 		$mysqli2 = new pdo('mysql:host=mysql.skillsim.com;dbname=skillsim02;charset=utf8', 'skillsim02', 'nas9duh198je');
 		$query = $mysqli2->query("select  voucher from purchases where id = '$a' ");
 
 
-		if ( ! $query ) {
+		if (!$query) {
 			return array();
 		}
 
@@ -420,7 +426,8 @@ class RelatoriosModel extends MainController
 	}
 
 
-	public function getHelperData($a){
+	public function getHelperData($a)
+	{
 
 
 		$query = $this->db->query("
@@ -441,7 +448,8 @@ class RelatoriosModel extends MainController
 	}
 
 
-	public function importTransactionVoucher($id){
+	public function importTransactionVoucher($id)
+	{
 
 
 
@@ -449,34 +457,34 @@ class RelatoriosModel extends MainController
 
 
 
-		$query = $mysqli->query("select  a.*, a.id,  date_format(Concat(SUBSTR(data_venda, 7, 4),'-', SUBSTR(data_venda, 4, 2),'-', SUBSTR(data_venda, 1, 2) , ' ' , SUBSTR(horario_venda, 1, 2),':', SUBSTR(horario_venda, 4, 2), ':00'), '%d/%m/%Y %H:%iHs') as data_compra, date_format(Concat(SUBSTR(voucher_data_retirada, 7, 4),'-', SUBSTR(voucher_data_retirada, 4, 2),'-', SUBSTR(voucher_data_retirada, 1, 2)), '%d/%m/%Y ') as data_retirada, voucher_cod_referencia, voucher_forma_pagamento, if(voucher_sedex=1, 'Sedex', 'Retirada no Quiosque') as retirada,  voucher_nome_cliente, voucher_email, voucher_cupom,  voucher_status_compra, concat('R$', format(voucher_valor_total,2,'en_US')) as valor_total from  vendas a WHERE id_quiosque = 9999 AND id >= 41180 ".$qs." ORDER BY voucher_id_purchase DESC ".($page?"LIMIT ".($page - 1) * 20 .",20":"")."");
+			$query = $mysqli->query("select  a.*, a.id,  date_format(Concat(SUBSTR(data_venda, 7, 4),'-', SUBSTR(data_venda, 4, 2),'-', SUBSTR(data_venda, 1, 2) , ' ' , SUBSTR(horario_venda, 1, 2),':', SUBSTR(horario_venda, 4, 2), ':00'), '%d/%m/%Y %H:%iHs') as data_compra, date_format(Concat(SUBSTR(voucher_data_retirada, 7, 4),'-', SUBSTR(voucher_data_retirada, 4, 2),'-', SUBSTR(voucher_data_retirada, 1, 2)), '%d/%m/%Y ') as data_retirada, voucher_cod_referencia, voucher_forma_pagamento, if(voucher_sedex=1, 'Sedex', 'Retirada no Quiosque') as retirada,  voucher_nome_cliente, voucher_email, voucher_cupom,  voucher_status_compra, concat('R$', format(voucher_valor_total,2,'en_US')) as valor_total from  vendas a WHERE id_quiosque = 9999 AND id >= 41180 ".$qs." ORDER BY voucher_id_purchase DESC ".($page?"LIMIT ".($page - 1) * 20 .",20":"")."");
 
 
 
 
 
-		$fetch = $query->fetchAll();
+			$fetch = $query->fetchAll();
 
 
 
-		$query = $mysqli->query("SELECT
+			$query = $mysqli->query("SELECT
 
-      	date_format(Concat(SUBSTR(data_compra, 7, 4),'-', SUBSTR(data_compra, 4, 2),'-', SUBSTR(data_compra, 1, 2) , ' ' ,  SUBSTR(data_compra, 12, 2),':', SUBSTR(trim(data_compra), 15, 2)), '%d/%m/%Y %H:%iHs') as 'Data da Compra',
-		cod_referencia as 'Cod. Referência',
-		forma_pagamento as 'Meio de Pagamento',
-		b.empresa as 'Vendedor',
-		if(sedex=1, 'Sedex', 'Retirada no Quiosque') as 'Opção de Retirada',
+					date_format(Concat(SUBSTR(data_compra, 7, 4),'-', SUBSTR(data_compra, 4, 2),'-', SUBSTR(data_compra, 1, 2) , ' ' ,  SUBSTR(data_compra, 12, 2),':', SUBSTR(trim(data_compra), 15, 2)), '%d/%m/%Y %H:%iHs') as 'Data da Compra',
+			cod_referencia as 'Cod. Referência',
+			forma_pagamento as 'Meio de Pagamento',
+			b.empresa as 'Vendedor',
+			if(sedex=1, 'Sedex', 'Retirada no Quiosque') as 'Opção de Retirada',
 
-		voucher as 'Voucher',
-		nome as 'Nome Cliente',
-		a.email as 'E-mail',
-	    a.cupom as 'Cupom Utilizado',
-	    concat('R$', format(valor_total,2,'en_US')) as 'Valor Total',
-		if(status_compra=1, 'Aguardando Pagamento', if(status_compra=2, 'Em análise',  if(status_compra=3, 'Paga',  if(status_compra=6, 'Devolvida',  if(status_compra=7, 'Cancelada',  if(status_compra=10, 'Compra Faturada', if(status_compra=4, 'Disponível',  '') )))))) as 'Status do Pagamento'
+			voucher as 'Voucher',
+			nome as 'Nome Cliente',
+			a.email as 'E-mail',
+				a.cupom as 'Cupom Utilizado',
+				concat('R$', format(valor_total,2,'en_US')) as 'Valor Total',
+			if(status_compra=1, 'Aguardando Pagamento', if(status_compra=2, 'Em análise',  if(status_compra=3, 'Paga',  if(status_compra=6, 'Devolvida',  if(status_compra=7, 'Cancelada',  if(status_compra=10, 'Compra Faturada', if(status_compra=4, 'Disponível',  '') )))))) as 'Status do Pagamento'
 
 
 
-		from purchases a LEFT JOIN usuarios b on a.id_vendedor = b.id where a.id = '$id' ");*/
+			from purchases a LEFT JOIN usuarios b on a.id_vendedor = b.id where a.id = '$id' ");*/
 
 
 		$query = $this->db->query("SELECT
@@ -525,7 +533,7 @@ class RelatoriosModel extends MainController
 
 
 
-		if ( ! $query ) {
+		if (!$query) {
 
 			return array();
 		}
@@ -536,7 +544,8 @@ class RelatoriosModel extends MainController
 
 	}
 
-	public function exportProrrogados(){
+	public function exportProrrogados()
+	{
 
 
 
@@ -546,90 +555,90 @@ class RelatoriosModel extends MainController
 		$qs .= "adiar  > '0' and ";
 
 
-		foreach($_GET as $key => $search):
+		foreach ($_GET as $key => $search):
 
-		  if($search){
+			if ($search) {
 
-		  switch($key):
+				switch ($key):
 
-		    case"IDS":
+					case "IDS":
 
-				$qs .=  "a.id  in(".implode(',', explode('|', $search)).") and ";
+						$qs .= "a.id  in(" . implode(',', explode('|', $search)) . ") and ";
 
-		  	break;
+						break;
 
-		  	case"adiar":
+					case "adiar":
 
-				$qs .=  $key." = '".$search."' and ";
+						$qs .= $key . " = '" . $search . "' and ";
 
-		  	break;
+						break;
 
-			case"data_transacao":
+					case "data_transacao":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-		  	case"data_ativacao":
+					case "data_ativacao":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-		  	case"data_off":
+					case "data_off":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-			case"data_off_adiado":
+					case "data_off_adiado":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(date_add(data_off, interval adiar day)) between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(date_add(data_off, interval adiar day)) between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-		  	case"data_adiamento":
+					case "data_adiamento":
 
-			  	$search = explode('-', $search);
-
-
-			    if($search[0] or $search[1]):
-
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-
-		  		endif;
-
-		  	break;
+						$search = explode('-', $search);
 
 
+						if ($search[0] or $search[1]):
 
-			default:
-			  $qs .= str_replace('|','.', $key)." like '%".trim($search)."%' and ";
-		  	break;
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
 
-		  endswitch;
+						endif;
 
-		  }
+						break;
+
+
+
+					default:
+						$qs .= str_replace('|', '.', $key) . " like '%" . trim($search) . "%' and ";
+						break;
+
+				endswitch;
+
+			}
 
 		endforeach;
 
-		$qs = ($qs)?'where '.substr($qs, 0, -4):'';
+		$qs = ($qs) ? 'where ' . substr($qs, 0, -4) : '';
 
 
 
@@ -660,11 +669,11 @@ class RelatoriosModel extends MainController
         LEFT JOIN wd_fornecedores d ON a.fornecedor_mdn = d.ID
 
 
-		".$qs." order by a.ID DESC ");
+		" . $qs . " order by a.ID DESC ");
 
 
 
-		if ( ! $query ) {
+		if (!$query) {
 
 			return array();
 		}
@@ -675,128 +684,129 @@ class RelatoriosModel extends MainController
 
 	}
 
-	public function exportReportVoucher($id, $tipo){
+	public function exportReportVoucher($id, $tipo)
+	{
 
 
 
 		unset($_GET[path], $_GET[p]);
 
 
-		if($tipo=='site'):
+		if ($tipo == 'site'):
 
 			$qs .= "vendedor is null and ";
 
-	    else:
+		else:
 
 			$qs .= "vendedor  > '' and ";
 
-	    endif;
+		endif;
 
-		if($_GET[sedex]=='0'):
+		if ($_GET[sedex] == '0'):
 
-			$qs .= str_replace('|','.', 'sedex')." = '".$_GET[sedex]."' and ";
+			$qs .= str_replace('|', '.', 'sedex') . " = '" . $_GET[sedex] . "' and ";
 
 		endif;
 
-		foreach($_GET as $key => $search):
+		foreach ($_GET as $key => $search):
 
-		  if($search){
+			if ($search) {
 
-		  switch($key):
+				switch ($key):
 
-		  case"IDS":
+					case "IDS":
 
-				$qs .=  "a.id  in(".implode(',', explode('|', $search)).") and ";
+						$qs .= "a.id  in(" . implode(',', explode('|', $search)) . ") and ";
 
-		  	break;
+						break;
 
-		  	case"ID":
-		  	  $qs .= str_replace('|','.', $key)." = '".$search."' and ";
-		  	break;
+					case "ID":
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
+						break;
 
-			case"email":
+					case "email":
 
-				$qs .= str_replace('|','.', $key)." = '".$search."' and ";
+						$qs .= str_replace('|', '.', $key) . " = '" . $search . "' and ";
 
-		  	break;
+						break;
 
-			case"valor_total":
+					case "valor_total":
 
-				$qs .=  $key." = '".formatMoney($search)."' and ";
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-		  	break;
+						break;
 
-			 case"data_compra":
+					case "data_compra":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-			case"data_retirada":
+					case "data_retirada":
 
-			  	$search = explode('-', $search);
+						$search = explode('-', $search);
 
-			    if($search[0] or $search[1]):
-				$qs .=  "date(".$key.") between date('".dateDBS(trim($search[0]))."') and  date('".dateDBS(trim($search[1]))."')  and ";
-		  		endif;
+						if ($search[0] or $search[1]):
+							$qs .= "date(" . $key . ") between date('" . dateDBS(trim($search[0])) . "') and  date('" . dateDBS(trim($search[1])) . "')  and ";
+						endif;
 
-		  	break;
+						break;
 
-			case"valor_base":
+					case "valor_base":
 
-				$qs .=  $key." = '".formatMoney($search)."' and ";
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-		  	break;
+						break;
 
-			case"a|valor_dolar":
+					case "a|valor_dolar":
 
-				$qs .=  str_replace('|','.', $key)." = '".formatMoney($search)."' and ";
+						$qs .= str_replace('|', '.', $key) . " = '" . formatMoney($search) . "' and ";
 
-		  	break;
+						break;
 
-			case"valor_total":
+					case "valor_total":
 
-				$qs .=  $key." = '".formatMoney($search)."' and ";
+						$qs .= $key . " = '" . formatMoney($search) . "' and ";
 
-		  	break;
-
-
-
-			case"status_compra":
-
-				$qs .=  $key." = '".$search."' and ";
-
-		  	break;
-
-			case"resgatado":
-
-				$qs .=  $key." = '".$search."' and ";
-
-			  break;
-
-			case"vendedor":
+						break;
 
 
 
-		   $qs .=  $key.(strtolower($search)=='site'?' is null and ':" like '%".trim($search)."%' and ");
+					case "status_compra":
 
-		  	break;
+						$qs .= $key . " = '" . $search . "' and ";
 
-			default:
-			  $qs .= str_replace('|','.', $key)." like '%".trim($search)."%' and ";
-		  	break;
+						break;
 
-		  endswitch;
+					case "resgatado":
 
-		  }
+						$qs .= $key . " = '" . $search . "' and ";
+
+						break;
+
+					case "vendedor":
+
+
+
+						$qs .= $key . (strtolower($search) == 'site' ? ' is null and ' : " like '%" . trim($search) . "%' and ");
+
+						break;
+
+					default:
+						$qs .= str_replace('|', '.', $key) . " like '%" . trim($search) . "%' and ";
+						break;
+
+				endswitch;
+
+			}
 
 		endforeach;
 
-		$qs = ($qs)?'where '.substr($qs, 0, -4):'';
+		$qs = ($qs) ? 'where ' . substr($qs, 0, -4) : '';
 
 
 
@@ -839,11 +849,11 @@ class RelatoriosModel extends MainController
 		LEFT JOIN wd_transacoes x ON a.id_venda = x.id_skillsim
 		LEFT JOIN wd_atendentes y ON x.atendente = y.ID
 
-		".$qs." order by a.ID DESC ");
+		" . $qs . " order by a.ID DESC ");
 
 
 
-		if ( ! $query ) {
+		if (!$query) {
 
 			return array();
 		}
@@ -854,7 +864,8 @@ class RelatoriosModel extends MainController
 
 	}
 
-	public function changeSim(){
+	public function changeSim()
+	{
 
 
 		$mysqli = new pdo('mysql:host=66.165.234.2;dbname=sistemas_skillsim;charset=utf8', 'sistemas_simcard', 'Jdh^do@fhhas');
@@ -862,7 +873,7 @@ class RelatoriosModel extends MainController
 
 		$query = $this->db->update('wd_transacoes_erros', 'id_skillsim', $_POST[id], array('iccid_novo' => $_POST[sim]));
 
-		if($query):
+		if ($query):
 
 			echo 'ok';
 
@@ -872,31 +883,31 @@ class RelatoriosModel extends MainController
 	}
 
 
-	public function cancelVoucher(){
+	public function cancelVoucher()
+	{
 
 		$query = $this->db->update('wd_vouchers', 'id_voucher', $_POST[ID], array('status' => 2));
 
 	}
 
-  public function getSellersByDay($download){
+	public function getSellersByDay($download)
+	{
 
 		if ($_GET['periodo']) {
 
-			$periodo = explode('-',$_GET['periodo']);
-			$period['start'] = str_replace(' ','',dateDBS($periodo[0]));
+			$periodo = explode('-', $_GET['periodo']);
+			$period['start'] = str_replace(' ', '', dateDBS($periodo[0]));
 			$period['end'] = dateAdd('day', 1, dateDBS($periodo[1]));
 
-			$date = "and data_transacao BETWEEN date('".$period['start']."') and date('".$period['end']."')";
+			$date = "and data_transacao BETWEEN date('" . $period['start'] . "') and date('" . $period['end'] . "')";
 
-		}
-		else
-		{
+		} else {
 			$date = "and DATE(data_transacao) = date(NOW())";
 		}
 
 
 		//require ABSPATH.'/frameworks/phpspreadsheet/vendor/autoload.php';
-		require_once(ABSPATH.'/frameworks/mpdf/mpdf.php');
+		require_once(ABSPATH . '/frameworks/mpdf/mpdf.php');
 
 		$query = $this->db->query("
 		SELECT
@@ -929,7 +940,7 @@ class RelatoriosModel extends MainController
 
 		$i = 0;
 		$t = 0;
-		foreach($reports as $report) {
+		foreach ($reports as $report) {
 
 
 
@@ -951,32 +962,32 @@ class RelatoriosModel extends MainController
 
 
 
-			 if($i && $report['local']!=$reports[$i-1]['local']){
+			if ($i && $report['local'] != $reports[$i - 1]['local']) {
 
 				$total_partial['chips'] -= $report['total'];
-			$total_partial['cc'] -= $report['credito'];
-			$total_partial['dd'] -= $report['debito'];
-			$total_partial['real'] -= $report['real'];
-			$total_partial['dolar'] -= $report['dolar'];
-			$total_partial['euro'] -= $report['euro'];
+				$total_partial['cc'] -= $report['credito'];
+				$total_partial['dd'] -= $report['debito'];
+				$total_partial['real'] -= $report['real'];
+				$total_partial['dolar'] -= $report['dolar'];
+				$total_partial['euro'] -= $report['euro'];
 
-				if($t>1){
+				if ($t > 1) {
 					$data['table'] .= $this->geraTableTotalPerLocal($total_partial);
-					}
+				}
 
-					$data['table'] .= "
+				$data['table'] .= "
 					</tbody>
 					</table>
 					<table style='width: 100%;  margin-bottom: 15px'>
 					<tbody>
 					";
 
-					$total_partial = [];
-					$t=0;
+				$total_partial = [];
+				$t = 0;
 
-			 }
+			}
 
-			 $data['table'] .= $this->geraTable($report);
+			$data['table'] .= $this->geraTable($report);
 
 
 			// 	if($t>1){
@@ -1017,34 +1028,35 @@ class RelatoriosModel extends MainController
 
 		$data['table'] .= $this->geraTableTotal($total);
 
-		$data['date'] =  $periodo ? (str_replace(' ','', $periodo[0])!=str_replace(' ','', $periodo[1])?'Período ' . $periodo[0] . "-" . $periodo[1]:$periodo[0]) : date('d/m/Y');
-		$data['name'] = $nome = 'Relatório Diário '.date("d-m-Y").'.pdf';
+		$data['date'] = $periodo ? (str_replace(' ', '', $periodo[0]) != str_replace(' ', '', $periodo[1]) ? 'Período ' . $periodo[0] . "-" . $periodo[1] : $periodo[0]) : date('d/m/Y');
+		$data['name'] = $nome = 'Relatório Diário ' . date("d-m-Y") . '.pdf';
 
 
 
-		$body = file_get_contents(ABSPATH.'/views/relatorios/templates/dailyReport.html');
+		$body = file_get_contents(ABSPATH . '/views/relatorios/templates/dailyReport.html');
 
 
 
-		foreach($data as $k=>$v){
-			$body = str_replace('{'.$k.'}', $v, $body);
-	  }
+		foreach ($data as $k => $v) {
+			$body = str_replace('{' . $k . '}', $v, $body);
+		}
 
 
 		$this->pdf = new Mpdf();
 		$this->pdf->WriteHTML($body);
 		$this->adjustFontDescLineheight = 1.14;
-	$this->pdf->Output($data['name'], 'D');
+		$this->pdf->Output($data['name'], 'D');
 
 
 	}
 
-  public function geraTable($data){
+	public function geraTable($data)
+	{
 
 		return "
 
 		<tr>
-			<td style='width: 20%'><strong>" . strtoupper($data['ponto']). "</strong></td>
+			<td style='width: 20%'><strong>" . strtoupper($data['ponto']) . "</strong></td>
 			<td style='width: 10%'>" . $data['total'] . "</td>
 			<td style='width: 15%'>R$ " . money($data['credito']) . "</td>
 			<td style='width: 15%'>R$ " . money($data['debito']) . "</td>
@@ -1057,7 +1069,8 @@ class RelatoriosModel extends MainController
 
 	}
 
-	public function geraTableTotalPerLocal($data){
+	public function geraTableTotalPerLocal($data)
+	{
 
 		return "
 
@@ -1075,7 +1088,8 @@ class RelatoriosModel extends MainController
 
 	}
 
-	public function geraTableTotal($data){
+	public function geraTableTotal($data)
+	{
 
 		return "
 		<table style='width: 100%;  margin-bottom: 15px'>

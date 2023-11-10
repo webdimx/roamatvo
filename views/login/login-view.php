@@ -29,7 +29,7 @@
 	<div id="container">
 
 
-		<?= ($_GET[expired] == true ? '<div class="advice">Sua sessão expirou, faça login novamente!</div>' : '') ?>
+		<?= ($_GET['expired'] == true ? '<div class="advice">Sua sessão expirou, faça login novamente!</div>' : '') ?>
 
 
 		<div class="logo-area">

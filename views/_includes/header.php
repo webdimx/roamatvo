@@ -4,11 +4,11 @@
 
 $user = $this->getUserInfo(); ?>
 <script>
-
+	
 	ajaxUrl = '<?= HOME_URI ?>'
 	controllerUrl = '<?= HOME_URI . $this->controller ?>/'
 	subController = '<?= $this->subController ?>'
-	ignoreRequired = <?= ($this->ignoreRequired) ? "true" : "''" ?>;
+	i g noreRequired = <?= ($this->ignoreRequired) ? "true" : "''" ?>;
 
 
 </script>
@@ -200,7 +200,9 @@ $user = $this->getUserInfo(); ?>
 				<li class="blue dropdown-modal">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
 						<i class="ace-icon fa fa-bell"></i>
-						<span class="badge badge-important"><?= ($model->notify ? $model->notify : '') ?></span>
+						<span class="badge badge-important">
+							<?= ($model->notify ? $model->notify : '') ?>
+						</span>
 					</a>
 
 					<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
@@ -225,7 +227,9 @@ $user = $this->getUserInfo(); ?>
 													<span class="pull-left">
 														Ocorrências
 													</span>
-													<span class="pull-right badge badge-success"><?= $model->notify ?></span>
+													<span class="pull-right badge badge-success">
+														<?= $model->notify ?>
+													</span>
 												</div>
 											</a>
 										</li>
@@ -257,7 +261,7 @@ $user = $this->getUserInfo(); ?>
 
 
 						<?
-						if ($_SESSION[userdata][type]):
+						if ($_SESSION['userdata']['type']):
 							?>
 							<li>
 								<a href="<?php echo HOME_URI; ?>usuarios/editar/">

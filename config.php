@@ -14,7 +14,7 @@ define('HOSTNAME', 'localhost');
 define('DB_NAME', 'roam_system');
 define('DB_USER', 'roam_webdim');
 define('DB_PASSWORD', 'Zgzr19yh@');
-define('DEBUG', ($_GET[debug] ? true : false));
+define('DEBUG', false);
 define('LOADER', false);
 
 require_once ABSPATH . '/loader.php';
