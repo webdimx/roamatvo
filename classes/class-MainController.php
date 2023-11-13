@@ -72,6 +72,9 @@ class MainController extends UserLogin
 	public function __construct($parametros = array())
 	{
 
+		echo 'oioioioi';
+
+
 		// Instancia do DB
 		$this->db = new TutsupDB();
 
@@ -105,6 +108,7 @@ class MainController extends UserLogin
 	 */
 	public function load_model($model_name = false)
 	{
+
 
 		// Um arquivo deverá ser enviado
 		if (!$model_name)

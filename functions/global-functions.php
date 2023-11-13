@@ -34,6 +34,8 @@ function chk_array($array, $key)
  * Por exemplo: para a classe TutsupMVC, o arquivo vai chamar class-TutsupMVC.php
  */
 spl_autoload_register(function ($class_name) {
+
+
 	$file = ABSPATH . '/classes/class-' . $class_name . '.php';
 
 	if (!file_exists($file)) {

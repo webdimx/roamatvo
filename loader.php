@@ -26,5 +26,5 @@ if (!defined('DEBUG') || DEBUG === false) {
 require_once ABSPATH . '/functions/global-functions.php';
 
 // Carrega a aplicação
-$tutsup_mvc = new TutsupMVC();
 
+$tutsup_mvc = new TutsupMVC();
