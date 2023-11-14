@@ -8,7 +8,7 @@
 
 	<body class="no-skin col2">
 
-        
+
 
 		<?
 
@@ -28,7 +28,7 @@
 
 		?>
 
-		
+
 
         <?  require_once('header.php')?>
 
@@ -42,33 +42,33 @@
 
 			</script>
 
-            
 
-            
+
+
 
 			<div class="main-content">
 
 				<div class="main-content-inner">
 
-                
+
 
 					<div class="page-content">
 
-                    
 
-                    
+
+
 
                     <div class="page-header">
 
-                    
 
-                
+
+
 
 					<h1><?=$this->title?></h1>
 
-                    
 
-                    
+
+
 
                     <div class="button-set">
 
@@ -80,7 +80,7 @@
 
                         </button>
 
-						
+
 
 						<div class="alert-load">
 
@@ -92,29 +92,29 @@
 
                     <? endif; ?>
 
-                    
+
 
                     <? if($this->controller=="financeiro"):?>
 
-                        
 
-                        
+
+
 
                         <? endif;?>
 
-                        
 
-                    
 
-                        
 
-                        
 
-                        
 
-                        
 
-                        
+
+
+
+
+
+
+
 
                         <? if($this->controller=="swap"):?>
 
@@ -134,13 +134,13 @@
 
                             <i class="ace-icon fa fa-file-text-o bigger-110"></i> Copiar
 
-                        </a>    
+                        </a>
 
                         <? endif;?>
 
-                        
 
-                    
+
+
 
                     <?
 
@@ -158,11 +158,11 @@
 
                         </button>
 
-                    <? 
+                    <?
 
 					endforeach;
 
-					endif; 
+					endif;
 
 					?>
 
@@ -170,33 +170,33 @@
 
 					</div>
 
-                    
 
-                    
+
+
 
                     <!-- /.page-header -->
 
-                    
+
 
                     <div class="row">
 
 						<div class="col-xs-12">
 
-                        
+
 
                         <!-- sidebar -->
 
-                        
+
 
                         <div class="invisible">
 
-                         
+
 
 <div id="sidebar2" class="sidebar <?=$this->sideMin?'':''?> navbar-collapse collapse ace-save-state">                          <!--<div id="sidebar2" class="sidebar responsive ace-save-state">-->
 
                               <ul class="nav nav-list">
 
-                              	
+
 
                                 <?
 
@@ -224,7 +224,7 @@
 
                               </ul>
 
-                              
+
 
                              <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 
@@ -234,9 +234,9 @@
 
 
 
-				
 
-                              
+
+
 
                           </div>
 
@@ -244,25 +244,25 @@
 
                         <!-- .sidebar -->
 
-                        
+
 
                         <!-- alert -->
 
-                        
+
 
                         <div class="alert"></div>
 
-                        
+
 
                         <!-- .alert -->
 
-                        
+
 
 						<?
 
 						echo ($this->form)?'<form id="form" class="form-horizontal" role="form" action="'.HOME_URI.$this->form.'">':'';
 
-				
+
 
 						foreach($this->view as $render):
 
@@ -270,7 +270,7 @@
 
 						endforeach;
 
-						
+
 
 						echo ($this->form)?'</form>':''
 
@@ -286,7 +286,7 @@
 
 			</div><!-- /.main-content -->
 
-            
+
 
             <script type="text/javascript">
 
@@ -294,27 +294,27 @@
 
 				</script>
 
-           
 
-           
 
-            
+
+
+
 
             <script>
 
 			$(document).ready(function(){
 
-				
+
 
             $('.page-box').hide()
 
 			$('.page-box').eq(0).show()
 
-			
+
 
 			$('#sidebar2 .nav-list a').click(function(a){
 
-				
+
 
 				if(!$(this).data('link')){
 
@@ -326,189 +326,25 @@
 
 				}
 
-				
 
-				
 
-			})	
+
+
+			})
 
 			})
 
             </script>
 
-            
+
 
 
 
 	<? require_once('footer.php')?>
 
-    
 
-    <div id="modal-form" class="modal" tabindex="-1">
 
-									<div class="modal-dialog">
 
-                                    
-
-                                    	<form id="new-attribute" action="#">
-
-                                        
-
-										<div class="modal-content">
-
-											<div class="modal-header">
-
-												<button type="button" class="close" data-dismiss="modal">×</button>
-
-												<h4 class="blue ">Selecione os produtos</h4>
-
-											</div>
-
-
-
-											<div class="modal-body">
-
-												<div class="row">
-
-                                                	
-
-                                                  <div class="col-lg-12">
-
-                                                  	
-
-													<?
-
-													$data = $modelProduct->getList();
-
-                                                    foreach($data[data] as $_product):
-
-													?>
-
-                                                    <div class="col-lg-6">
-
-													<label>
-
-														<input name="product_id[]" value="<?=$_product[ID]?>" type="checkbox" class="ace">
-
-														<span class="lbl"> <?=$_product[nome]?> </span>
-
-													</label>
-
-													</div>
-
-                                                    
-
-													<?
-
-													endforeach;
-
-													?>
-
-                                                    </div>
-
-												</div>
-
-											</div>
-
-
-
-											<div class="modal-footer">
-
-												<button class="btn btn-sm" data-dismiss="modal">
-
-													<i class="ace-icon fa fa-times"></i>
-
-													Cancelar
-
-												</button>
-
-
-
-												<button class="btn btn-sm btn-primary"  >
-
-													<i class="ace-icon fa fa-check"></i>
-
-													Adicionar Produto
-
-												</button>
-
-											</div>
-
-										</div>
-
-                                        
-
-                                        </form>
-
-									</div>
-
-								</div>
-
-                                
-
-                                
-
-                                <div id="modal-condominios" class="modal" tabindex="-1" style="">
-
-									<div class="modal-dialog">
-
-                                    
-
-                                    	<form id="getProductsCondominium" action="#">
-
-                                        
-
-										<div class="modal-content">
-
-											<div class="modal-header">
-
-												<button type="button" class="close" data-dismiss="modal">×</button>
-
-												<h4 class="blue ">Resultado da pesquisa</h4>
-
-											</div>
-
-
-
-											<div class="modal-body">
-
-												
-
-											</div>
-
-
-
-											<div class="modal-footer">
-
-												<button class="btn btn-sm" data-dismiss="modal">
-
-													<i class="ace-icon fa fa-times"></i>
-
-													Cancelar
-
-												</button>
-
-
-
-												<button class="btn btn-sm btn-primary"  >
-
-													<i class="ace-icon fa fa-check"></i>
-
-													Adicionar Produto
-
-												</button>
-
-											</div>
-
-										</div>
-
-                                        
-
-                                        </form>
-
-									</div>
-
-								</div>
 
 	</body>
 

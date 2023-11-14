@@ -1,7 +1,5 @@
 <?php
 
-
-
 date_default_timezone_set('America/Sao_Paulo');
 
 /**
@@ -156,7 +154,7 @@ function str_replace_first($a, $b, $s)
 
 
 
-function formatDate($date, $hour)
+function formatDate($date, $hour = NULL)
 {
 
 	$_data = explode(' ', $date);
@@ -688,6 +686,3 @@ function formatCnpjCpf($value)
 
 	return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cnpj_cpf);
 }
-
-?>
-

@@ -100,7 +100,6 @@
 				<ul class="submenu">
 					<li><a href="<?php echo HOME_URI; ?>swap">Swap Pendentes</a></li>
 					<li><a href="<?php echo HOME_URI; ?>swap/gerados">Swap Gerados</a></li>
-					<li><a href="<?php echo HOME_URI; ?>swap/emails">E-mails</a></li>
 
 				</ul>
 			</li>
@@ -261,17 +260,7 @@
 								<?
 							endif;
 
-							if ($this->check_permissions('relatorios_vendas', $this->userdata['user_permissions'])):
-								?>
-								<li><a href="<?php echo HOME_URI; ?>relatorios/vendasAero">Vendas Aero</a></li>
-								<?
-							endif;
 
-							if ($this->check_permissions('relatorios_vendas', $this->userdata['user_permissions'])):
-								?>
-								<li><a href="<?php echo HOME_URI; ?>relatorios/vendasHD">Vendas HD</a></li>
-								<?
-							endif;
 
 							if ($this->check_permissions('relatorios_vendas', $this->userdata['user_permissions'])):
 								?>
@@ -279,17 +268,7 @@
 								<?
 							endif;
 
-							if ($this->check_permissions('vouchers_site', $this->userdata['user_permissions'])):
-								?>
-								<li><a href="<?php echo HOME_URI; ?>relatorios/vouchers/site">Site - Vouchers</a></li>
 
-								<?
-							endif;
-							if ($this->check_permissions('vouchers_corp', $this->userdata['user_permissions'])):
-								?>
-								<li><a href="<?php echo HOME_URI; ?>relatorios/vouchers/corp">Corp - Vouchers</a></li>
-								<?
-							endif;
 							if ($this->check_permissions('relatorios_ocorrencias', $this->userdata['user_permissions'])):
 								?>
 								<li><a href="<?php echo HOME_URI; ?>relatorios/ocorrencias">Ocorrências</a></li>
@@ -392,18 +371,6 @@
 				endif;
 				?>
 
-				<? if ($this->userdata['type'] == 1): ?>
-					<li class="hover produtos">
-						<a href="#" class="dropdown-toggle">
-							<i class="fa fa-cog menu-icon" aria-hidden="true"></i>
-							<span class="menu-text">
-								Configurações
-							</span>
-						</a>
-
-
-					</li>
-				<? endif; ?>
 
 
 			</ul><!-- /.nav-list -->
