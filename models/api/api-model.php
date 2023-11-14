@@ -9,6 +9,8 @@ class ApiModel extends MainController
 
 	public $response = [];
 
+	public $transaction;
+
 
 	public function __construct($db = false)
 	{
@@ -19,6 +21,9 @@ class ApiModel extends MainController
 		$this->table = 'wd_client_rest';
 		$this->tableTransacoes = 'wd_transacoes';
 		$this->tableMdn = 'wd_mdns';
+
+		$this->transaction = $this->load_model('transacoes/transacoes-model');
+
 
 		self::checkCredentials();
 
@@ -58,8 +63,10 @@ class ApiModel extends MainController
 	{
 
 		$this->validateTransaction();
+		$transaction = $this->transaction->setTransaction($this->data);
 
 		header("HTTP/1.0 201 Created");
+		$this->response["transaction_id"] = $transaction;
 		$this->response["status"] = true;
 		$this->response["message"] = "Transaction created successfully!";
 		echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
@@ -87,13 +94,7 @@ class ApiModel extends MainController
 				in_array($key, $required) &&
 				!$data
 			) {
-
-				header("HTTP/1.0 400 Bad Request");
-				$this->response["status"] = false;
-				$this->response["error"] = "The field $key is required!";
-				echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
-				exit();
-
+				$this->setBadRequest("The field $key is required!");
 			}
 
 		}
@@ -101,30 +102,19 @@ class ApiModel extends MainController
 		if (
 			!$this->validaPhone($this->data->phone)
 		) {
-			header("HTTP/1.0 400 Bad Request");
-			$this->response["status"] = false;
-			$this->response["error"] = "The field phone is invalid!";
-			exit();
+			$this->setBadRequest("The field phone is invalid!");
 		}
 
 		if (
 			!$this->validateEmail($this->data->email)
 		) {
-			header("HTTP/1.0 400 Bad Request");
-			$this->response["status"] = false;
-			$this->response["error"] = "The field email is not valid!";
-			echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
-			exit();
+			$this->setBadRequest("The field email is not valid!");
 		}
 
 		if (
 			!$this->validateDate($this->data->activation_date)
 		) {
-			header("HTTP/1.0 400 Bad Request");
-			$this->response["status"] = false;
-			$this->response["error"] = "The date format is not valid!";
-			echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
-			exit();
+			$this->setBadRequest("The date format is not valid!");
 		}
 
 
@@ -167,6 +157,16 @@ class ApiModel extends MainController
 			exit;
 		}
 
+
+	}
+
+	public function setBadRequest($message)
+	{
+
+		header("HTTP/1.0 400 Bad Request");
+		$this->response["status"] = false;
+		$this->response["error"] = $message;
+		exit();
 
 	}
 
