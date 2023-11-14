@@ -2143,7 +2143,7 @@ $(document).ready(function(){
 			}
 			else{
 
-				//window.location.reload()
+				window.location.reload()
 
 			}
 
