@@ -9,7 +9,7 @@ define('TEMP', ABSPATH . '/views/_files/tmp/');
 define('HASH', '0e0426281a6277e1');
 define('SITE_NAME', 'Roam Atvo');
 define('UP_ABSPATH', ABSPATH . '/views/_uploads');
-define('HOME_URI', 'https://www.roamatvo.com');
+define('HOME_URI', 'https://www.roamatvo.com/');
 define('HOSTNAME', 'localhost');
 define('DB_NAME', 'roam_system');
 define('DB_USER', 'roam_webdim');
