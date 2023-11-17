@@ -361,7 +361,10 @@
 								<li><a href="<?php echo HOME_URI; ?>cadastros/local-de-estoque">Local de Estoque</a></li>
 								<li><a href="<?php echo HOME_URI; ?>cadastros/formas-de-pagamento">Formas de Pagamento</a></li>
 								<li><a href="<?php echo HOME_URI; ?>cadastros/moedas">Moedas</a></li>
+								<li><a href="<?php echo HOME_URI; ?>cadastros/paises">Países</a></li>
+								<li><a href="<?php echo HOME_URI; ?>cadastros/continentes">Continentes</a></li>
 								<li><a href="<?php echo HOME_URI; ?>colaboradores">Usuarios</a></li>
+
 
 
 							</ul>

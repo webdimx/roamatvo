@@ -76,14 +76,14 @@ endif;
 
           <div class="col-lg-4">
             <p>
-              <label class="control-label no-padding-right" for="form-field-1">Local de Uso:</label><br>
-              <select name="<?= $this->controller ?>[local_uso]" class="col-xs-12 col-sm-12 col-lg-12 required">
+              <label class="control-label no-padding-right" for="form-field-1">País:</label><br>
+              <select name="<?= $this->controller ?>[pais]" class="col-xs-12 col-sm-12 col-lg-12 required">
                 <option value="">Selecione</option>
                 <?
-                foreach ($modelConfig->getOptions('local_de_uso', true) as $option):
+                foreach ($modelConfig->getOptions('paises', true) as $option):
                   ?>
-                  <option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data[local_uso] ? 'selected' : '') ?>>
-                    <?= $option[local] ?>
+                  <option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data['pais'] ? 'selected' : '') ?>>
+                    <?= $option['nome'] ?>
                   </option>
                   <?
                 endforeach;
@@ -94,7 +94,23 @@ endif;
 
 
 
-
+          <div class="col-lg-4">
+            <p>
+              <label class="control-label no-padding-right" for="form-field-1">Continente:</label><br>
+              <select name="<?= $this->controller ?>[continente]" class="col-xs-12 col-sm-12 col-lg-12 required">
+                <option value="">Selecione</option>
+                <?
+                foreach ($modelConfig->getOptions('continentes', true) as $option):
+                  ?>
+                  <option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data['continente'] ? 'selected' : '') ?>>
+                    <?= $option['nome'] ?>
+                  </option>
+                  <?
+                endforeach;
+                ?>
+              </select>
+            </p>
+          </div>
 
 
           <div class="col-lg-12">
@@ -139,69 +155,69 @@ endif;
     <div class="widget-main padding-20 scrollable " data-size="125" style="position: relative;">
       <div class="content">
 
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid"
+          aria-describedby="dynamic-table_info">
+          <thead>
+            <tr role="row">
+              <th class="center" rowspan="1" colspan="1" width="20"><label class="pos-rel"></th>
+              <th rowspan="1" colspan="1">Quantidade</th>
+              <th rowspan="1" colspan="1">Código</th>
+              <th rowspan="1" colspan="1">Descrição</th>
+              <th rowspan="1" colspan="1">Fornecedor</th>
+              <th rowspan="1" colspan="1"></th>
+            </tr>
+          </thead>
 
+          <tbody class="item-list">
 
-        <div class="row">
-          <div class="col-lg-12 item-list">
             <?
 
+            $opcoes = ($opcoes ? $opcoes : [1]);
             foreach ($opcoes as $data):
+
               ?>
-              <div class="row item" style="display:flex;gap: 15px;">
-                <div class="">
-                  <label class="control-label no-padding-right" for="form-field-1">Preferêncial:</label><br>
+              <tr role="row" class="odd item">
+                <td align="center" style="vertical-align: middle">
                   <input type="radio" value="1" name="<?= $this->controller ?>[preferencial][]" <?= ($data[preferencial] ? 'checked' : '') ?>>
-                </div>
-                <div class="">
-                  <p>
-                    <label class="control-label no-padding-right" for="form-field-1">Quantidade:</label><br>
-                    <input type="text" name="<?= $this->controller ?>[quantidade][]"
-                      class="col-xs-12 col-sm-12 col-lg-12 " maxlength="2" value="<?= $data[quantidade] ?>">
-                  </p>
-                </div>
-
-                <div class="">
-                  <p>
-                    <label class="control-label no-padding-right" for="form-field-1">Código:</label><br>
-                    <input type="text" name="<?= $this->controller ?>[codigocmovel][]"
-                      class="col-xs-12 col-sm-12 col-lg-12 " value="<?= $data[codigo] ?>">
-                  </p>
-                </div>
-                <div class="col-lg-3">
-                  <p>
-                    <label class="control-label no-padding-right" for="form-field-1">Descrição:</label><br>
-                    <input type="text" name="<?= $this->controller ?>[descricao][]" class="col-xs-12 col-sm-12 col-lg-12 "
-                      value="<?= $data[descricao] ?>">
-                  </p>
-                </div>
-                <div class="col">
-                  <p>
-                    <label class="control-label no-padding-right" for="form-field-1">Fornecedor:</label><br>
-                    <select name="<?= $this->controller ?>[fornecedor][]" class="col-xs-12 col-sm-12 col-lg-12">
-                      <option value="">Selecione</option>
-                      <?
-                      foreach ($modelConfig->getOptions('fornecedores', true) as $option):
-                        ?>
-                        <option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data[fornecedor] ? 'selected' : '') ?>>
-                          <?= $option[nome] ?>
-                        </option>
-                        <?
-                      endforeach;
+                <td>
+                  <input type="text" name="<?= $this->controller ?>[quantidade][]" class="col-xs-12 col-sm-12 col-lg-12 "
+                    maxlength="2" value="<?= $data[quantidade] ?>">
+                </td>
+                <td>
+                  <input type="text" name="<?= $this->controller ?>[codigocmovel][]"
+                    class="col-xs-12 col-sm-12 col-lg-12 " value="<?= $data[codigo] ?>">
+                </td>
+                <td>
+                  <input type="text" name="<?= $this->controller ?>[descricao][]" class="col-xs-12 col-sm-12 col-lg-12 "
+                    value="<?= $data[descricao] ?>">
+                </td>
+                <td align="center"><select name="<?= $this->controller ?>[fornecedor][]"
+                    class="col-xs-12 col-sm-12 col-lg-12">
+                    <option value="">Selecione</option>
+                    <?
+                    foreach ($modelConfig->getOptions('fornecedores', true) as $option):
                       ?>
-                    </select>
-                  </p>
-                </div>
-                <div class="col">
-                  <p>
-                    <button type="button" class="add"><i class="fa fa-plus"></i></button>
-                    <button type="button" class="remove"><i class="fa fa-remove"></i></button>
-                  </p>
-                </div>
-              </div>
-            <? endforeach; ?>
-          </div>
+                      <option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data[fornecedor] ? 'selected' : '') ?>>
+                        <?= $option[nome] ?>
+                      </option>
+                      <?
+                    endforeach;
+                    ?>
+                  </select></td>
+                <td align="center" style="vertical-align: middle">
+                  <button type="button" class="add" style="border:none;border-radius:50%;background-color:#D15B47;color:#fff;width: 25px;
+    height: 25px;"><i class="fa fa-plus"></i></button>
+                  <button type="button" class="remove" style="border:none;border-radius:50%;background-color:#629B58;color:#fff;width: 25px;
+    height: 25px;"><i class="fa fa-remove"></i></button>
+                </td>
+              </tr>
+              <?
+            endforeach;
+            ?>
+          </tbody>
+        </table>
 
-        </div>
+
       </div>
     </div>
   </div>

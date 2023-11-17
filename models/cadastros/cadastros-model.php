@@ -38,6 +38,8 @@ class CadastrosModel extends MainController
 		$this->tableSimcard = 'wd_simcards';
 		$this->tableEnvios = 'wd_envios';
 		$this->tableEnviosSim = 'wd_envios_simcards';
+		$this->tablePaises = 'wd_paises';
+		$this->tableContinentes = 'wd_continentes';
 
 		$notify = $this->load_model('relatorios/relatorios-model');
 		$this->notify = $notify->checkNotify();
@@ -87,16 +89,10 @@ class CadastrosModel extends MainController
 						'situacao' => chk_array($this->form_data, 'situacao'),
 						'qtd_dias' => chk_array($this->form_data, 'qtd_dias'),
 						'codigo_plano' => chk_array($this->form_data, 'codigo_plano'),
-						'local_uso' => chk_array($this->form_data, 'local_uso'),
+						'pais' => chk_array($this->form_data, 'pais'),
+						'continente' => chk_array($this->form_data, 'continente'),
 						'fornecedor' => chk_array($this->form_data, 'fornecedor'),
-						'codigocmovel' => chk_array($this->form_data, 'codigocmovel'),
-						'descricao' => chk_array($this->form_data, 'descricao'),
-						'codigonmundo' => chk_array($this->form_data, 'codigonmundo'),
-						'codigonmundo01' => chk_array($this->form_data, 'codigonmundo01'),
-						'descricaonmundo' => chk_array($this->form_data, 'descricaonmundo'),
 						'observacao' => chk_array($this->form_data, 'observacao'),
-
-
 					)
 				);
 
@@ -142,13 +138,9 @@ class CadastrosModel extends MainController
 						'qtd_dias' => chk_array($this->form_data, 'qtd_dias'),
 						'codigo_plano' => chk_array($this->form_data, 'codigo_plano'),
 						'local_uso' => chk_array($this->form_data, 'local_uso'),
-						'codigocmovel' => chk_array($this->form_data, 'codigocmovel'),
-						'descricao' => chk_array($this->form_data, 'descricao'),
-						'codigonmundo' => chk_array($this->form_data, 'codigonmundo'),
-						'codigonmundo01' => chk_array($this->form_data, 'codigonmundo01'),
-						'descricaonmundo' => chk_array($this->form_data, 'descricaonmundo'),
+						'pais' => chk_array($this->form_data, 'pais'),
+						'continente' => chk_array($this->form_data, 'continente'),
 						'observacao' => chk_array($this->form_data, 'observacao'),
-
 						'fornecedor' => chk_array($this->form_data, 'fornecedor'),
 
 					)
@@ -401,6 +393,139 @@ class CadastrosModel extends MainController
 
 
 
+				if (!$query) {
+					echo $this->form_msg = 'error';
+					// Termina
+					return;
+				} else {
+					echo $this->form_msg = 'success';
+					// Termina
+					return;
+				}
+
+			endif;
+
+		endif;
+
+
+		// Paises
+
+		if ($table == 'paises'):
+
+			if (chk_array($this->form_data, 'action') == 'edit'):
+
+
+				$query = $this->db->update(
+					$this->tablePaises,
+					'ID',
+					chk_array($this->form_data, 'ID'),
+					array(
+						'nome' => chk_array($this->form_data, 'nome'),
+						'codigo' => chk_array($this->form_data, 'codigo'),
+						'situacao' => chk_array($this->form_data, 'situacao'),
+						'observacao' => chk_array($this->form_data, 'observacao'),
+					)
+				);
+
+				if (!$query) {
+					echo $this->form_msg = 'error_update';
+					// Termina
+					return;
+				} else {
+					echo $this->form_msg = 'success_update';
+					// Termina
+					return;
+				}
+
+			else:
+
+
+				if ($this->exists($this->tablePaises, 'nome', chk_array($this->form_data, 'nome'))):
+
+					echo $this->form_msg = 'exists';
+					return;
+
+				endif;
+
+				$query = $this->db->insert(
+					$this->tablePaises,
+					array(
+						'nome' => chk_array($this->form_data, 'nome'),
+						'codigo' => chk_array($this->form_data, 'codigo'),
+						'continente' => chk_array($this->form_data, 'continente'),
+						'situacao' => chk_array($this->form_data, 'situacao'),
+						'observacao' => chk_array($this->form_data, 'observacao'),
+					)
+				);
+
+
+
+				if (!$query) {
+					echo $this->form_msg = 'error';
+					// Termina
+					return;
+				} else {
+					echo $this->form_msg = 'success';
+					// Termina
+					return;
+				}
+
+			endif;
+
+		endif;
+
+
+		// Continentes
+
+		if ($table == 'continentes'):
+
+			if (chk_array($this->form_data, 'action') == 'edit'):
+
+
+				$query = $this->db->update(
+					$this->tableContinentes,
+					'ID',
+					chk_array($this->form_data, 'ID'),
+					array(
+
+						'nome' => chk_array($this->form_data, 'local'),
+						'codigo' => chk_array($this->form_data, 'codigo'),
+						'situacao' => chk_array($this->form_data, 'situacao'),
+						'observacao' => chk_array($this->form_data, 'observacao'),
+					)
+				);
+
+				if (!$query) {
+					echo $this->form_msg = 'error_update';
+					// Termina
+					return;
+				} else {
+					echo $this->form_msg = 'success_update';
+					// Termina
+					return;
+				}
+
+
+			else:
+
+				if ($this->exists($this->tableContinentes, 'nome', chk_array($this->form_data, 'nome'))):
+
+					echo $this->form_msg = 'exists';
+					return;
+
+				endif;
+
+				$query = $this->db->insert(
+					$this->tableContinentes,
+					array(
+
+						'nome' => chk_array($this->form_data, 'local'),
+						'codigo' => chk_array($this->form_data, 'codigo'),
+						'situacao' => chk_array($this->form_data, 'situacao'),
+						'observacao' => chk_array($this->form_data, 'observacao'),
+
+					)
+				);
 				if (!$query) {
 					echo $this->form_msg = 'error';
 					// Termina
@@ -1402,6 +1527,16 @@ class CadastrosModel extends MainController
 			$query = $this->db->query('SELECT a.*  FROM `' . $this->tableLocalVenda . '` a ' . $qs . '   ORDER BY local ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
 			$count = $this->db->query('SELECT a.*  FROM `' . $this->tableLocalVenda . '` a ' . $qs . ' ORDER BY ID DESC');
 
+		elseif ($table == 'paises'):
+
+			$query = $this->db->query('SELECT a.*  FROM `' . $this->tablePaises . '` a ' . $qs . '   ORDER BY nome ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
+			$count = $this->db->query('SELECT a.*  FROM `' . $this->tablePaises . '` a ' . $qs . ' ORDER BY ID DESC');
+
+		elseif ($table == 'continentes'):
+
+			$query = $this->db->query('SELECT a.*  FROM `' . $this->tableContinentes . '` a ' . $qs . '   ORDER BY nome ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
+			$count = $this->db->query('SELECT a.*  FROM `' . $this->tableContinentes . '` a ' . $qs . ' ORDER BY ID DESC');
+
 		elseif ($table == 'pontodevenda'):
 
 			$query = $this->db->query('SELECT a.*, b.local as local FROM `' . $this->tablePontoVenda . '` a  LEFT JOIN  `' . $this->tableLocalVenda . '` b ON a.local = b.ID ' . $qs . ' ORDER BY ponto ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
@@ -1503,6 +1638,15 @@ class CadastrosModel extends MainController
 		if ($table == 'atendentes'):
 			$query = $this->db->query("SELECT *  FROM `" . $this->tableAtendentes . "` where ID = '" . $id . "'");
 		endif;
+
+		if ($table == 'paises'):
+			$query = $this->db->query("SELECT *  FROM `" . $this->tablePaises . "` where ID = '" . $id . "'");
+		endif;
+
+		if ($table == 'continentes'):
+			$query = $this->db->query("SELECT *  FROM `" . $this->tableContinentes . "` where ID = '" . $id . "'");
+		endif;
+
 
 		if ($table == 'localdevenda'):
 			$query = $this->db->query("SELECT *  FROM `" . $this->tableLocalVenda . "` where ID = '" . $id . "'");
@@ -2462,6 +2606,8 @@ class CadastrosModel extends MainController
 				return $count[total];
 
 				break;
+
+
 
 			case "wd_local_de_estoque":
 
