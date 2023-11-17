@@ -1862,7 +1862,7 @@ $(document).ready(function(){
 
 			setTimeout(function(){
 
-				javascript:history.back()
+				//javascript:history.back()
 
 			},500)
 

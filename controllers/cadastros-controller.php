@@ -71,6 +71,7 @@ class cadastrosController extends MainController
 
 		$this->sidebar = (object) array(
 			array('anchor' => 'informacoes', 'icon' => '', 'title' => 'Informações'),
+			array('anchor' => 'opcoes', 'icon' => 'fa-list', 'title' => 'Opções')
 		);
 
 
@@ -98,6 +99,7 @@ class cadastrosController extends MainController
 
 		$this->sidebar = (object) array(
 			array('anchor' => 'informacoes', 'icon' => '', 'title' => 'Informações'),
+			array('anchor' => 'opcoes', 'icon' => 'fa-list', 'title' => 'Opções')
 		);
 
 
@@ -398,6 +400,58 @@ class cadastrosController extends MainController
 
 
 		$this->view[] = ABSPATH . '/views/cadastros/localdeestoque/form-view.php';
+		require ABSPATH . '/views/_includes/2-columns-left.php';
+
+	}
+
+	public function adicionarContinente()
+	{
+
+		$this->subController = '/continente';
+
+		$model = $this->load_model('cadastros/cadastros-model');
+
+		$this->isLogged();
+		$this->checkPermission($this->permission_required);
+		$parametros = (func_num_args() >= 1) ? func_get_arg(0) : array();
+
+		$this->title = 'Adicionar Continente';
+		$this->menu = 'cadastros';
+		$this->form = 'cadastros/submit/continente';
+
+
+		$this->sidebar = (object) array(
+			array('anchor' => 'informacoes', 'icon' => '', 'title' => 'Informações'),
+		);
+
+
+		$this->view[] = ABSPATH . '/views/cadastros/continente/form-view.php';
+		require ABSPATH . '/views/_includes/2-columns-left.php';
+
+	}
+
+	public function editarContinente()
+	{
+
+		$model = $this->load_model('cadastros/cadastros-model');
+
+		$this->isLogged();
+		$this->checkPermission($this->permission_required);
+		$parametros = (func_num_args() >= 1) ? func_get_arg(0) : array();
+
+		$this->title = 'Editar Continente';
+		$this->menu = 'cadastros';
+		$this->form = 'cadastros/submit/conteinente';
+		$this->action = 'edit';
+		$this->data = $model->getRegistry($parametros[0], 'continente');
+
+
+		$this->sidebar = (object) array(
+			array('anchor' => 'informacoes', 'icon' => '', 'title' => 'Informações'),
+		);
+
+
+		$this->view[] = ABSPATH . '/views/cadastros/continente/form-view.php';
 		require ABSPATH . '/views/_includes/2-columns-left.php';
 
 	}
@@ -1372,47 +1426,47 @@ class cadastrosController extends MainController
 
 
 
-					else:
-					?>
+																													else:
+																													?>
 
 
-				<tr role="row" class="odd">
+																												<tr role="row" class="odd">
 
-						 <input type="hidden" name="lote" value="1">
-						<?if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-						<td ><input type="hidden" name="<?=$this->controller?>[simcard][]" value="<?=$line[A]?>"><?=$line[A]?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
-						<td  ><input type="hidden" name="<?=$this->controller?>[mdn][]" value="<?=$line[B]?>"><?=$line[B]?></td>
-						<? endif;?>
+																														 <input type="hidden" name="lote" value="1">
+																														<?if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																														<td ><input type="hidden" name="<?=$this->controller?>[simcard][]" value="<?=$line[A]?>"><?=$line[A]?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
+																														<td  ><input type="hidden" name="<?=$this->controller?>[mdn][]" value="<?=$line[B]?>"><?=$line[B]?></td>
+																														<? endif;?>
 
-						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-						<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_simcard][]" value="<?=$_POST[fornecedor_simcard]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_simcard], 'nome')?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
-						<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_mdn][]" value="<?=$_POST[fornecedor_mdn]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_mdn], 'nome')?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==3):?>
-						<td  ><input type="hidden" name="<?=$this->controller?>[tipo_uso][]" value="<?=$_POST[tipo_uso]?>"><?=$model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido')?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==1  || $_POST[tipo]==3):?>
-						<td ><input type="hidden" name="<?=$this->controller?>[status_mdn][]" value="<?=$_POST[status_mdn]?>"><?=$model->getDetail('status_mdn', $_POST[status_mdn], 'status')?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-						<td  ><input type="hidden" name="<?=$this->controller?>[status_simcard][]" value="<?=$_POST[status_simcard]?>"><?=$model->getDetail('status_simcard', $_POST[status_simcard], 'status')?></td>
-						<? endif;?>
-						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-						<td ><input type="hidden" name="<?=$this->controller?>[local_estoque][]" value="<?=$_POST[local_estoque]?>"><?=$model->getDetail('local_de_estoque', $_POST[local_estoque], 'local')?></td>
-						<? endif;?>
-						<td><input type="hidden" name="<?=$this->controller?>[lote][]" value="<?=$_POST[lote]?>"><?=$_POST[lote]?></td>
-				</tr>
+																														<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																														<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_simcard][]" value="<?=$_POST[fornecedor_simcard]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_simcard], 'nome')?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
+																														<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_mdn][]" value="<?=$_POST[fornecedor_mdn]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_mdn], 'nome')?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==3):?>
+																														<td  ><input type="hidden" name="<?=$this->controller?>[tipo_uso][]" value="<?=$_POST[tipo_uso]?>"><?=$model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido')?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==1  || $_POST[tipo]==3):?>
+																														<td ><input type="hidden" name="<?=$this->controller?>[status_mdn][]" value="<?=$_POST[status_mdn]?>"><?=$model->getDetail('status_mdn', $_POST[status_mdn], 'status')?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																														<td  ><input type="hidden" name="<?=$this->controller?>[status_simcard][]" value="<?=$_POST[status_simcard]?>"><?=$model->getDetail('status_simcard', $_POST[status_simcard], 'status')?></td>
+																														<? endif;?>
+																														<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																														<td ><input type="hidden" name="<?=$this->controller?>[local_estoque][]" value="<?=$_POST[local_estoque]?>"><?=$model->getDetail('local_de_estoque', $_POST[local_estoque], 'local')?></td>
+																														<? endif;?>
+																														<td><input type="hidden" name="<?=$this->controller?>[lote][]" value="<?=$_POST[lote]?>"><?=$_POST[lote]?></td>
+																												</tr>
 
-					<?
+																													<?
 
-					endif;
+																													endif;
 
 
-					*/
+																													*/
 
 
 
@@ -1429,7 +1483,9 @@ class cadastrosController extends MainController
 						Total de registros
 					</div>
 					<div class="profile-info-value">
-						<span><?= $i - 1 ?></span>
+						<span>
+							<?= $i - 1 ?>
+						</span>
 					</div>
 				</div>
 				<div class="profile-info-row">
@@ -1555,15 +1611,18 @@ class cadastrosController extends MainController
 					<td><input type="hidden" name="<?= $this->controller ?>[mdn][]" value="<?= $line[1] ?>">
 						<?= $line[1] ?>
 					</td>
-					<td><input type="hidden" name="<?= $this->controller ?>[fornecedor][]"
-							value="<?= $_POST[fornecedor] ?>"><?= $model->getDetail('fornecedores', $_POST[fornecedor], 'nome') ?></td>
-					<td><input type="hidden" name="<?= $this->controller ?>[status_mdn][]"
-							value="<?= $_POST[status_mdn] ?>"><?= $model->getDetail('status_mdn', $_POST[status_mdn], 'status') ?></td>
-					<td><input type="hidden" name="<?= $this->controller ?>[status_simcard][]"
-							value="<?= $_POST[status_simcard] ?>"><?= $model->getDetail('status_simcard', $_POST[status_simcard], 'status') ?>
+					<td><input type="hidden" name="<?= $this->controller ?>[fornecedor][]" value="<?= $_POST[fornecedor] ?>">
+						<?= $model->getDetail('fornecedores', $_POST[fornecedor], 'nome') ?>
 					</td>
-					<td><input type="hidden" name="<?= $this->controller ?>[tipo_uso][]"
-							value="<?= $_POST[tipo_uso] ?>"><?= $model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido') ?></td>
+					<td><input type="hidden" name="<?= $this->controller ?>[status_mdn][]" value="<?= $_POST[status_mdn] ?>">
+						<?= $model->getDetail('status_mdn', $_POST[status_mdn], 'status') ?>
+					</td>
+					<td><input type="hidden" name="<?= $this->controller ?>[status_simcard][]" value="<?= $_POST[status_simcard] ?>">
+						<?= $model->getDetail('status_simcard', $_POST[status_simcard], 'status') ?>
+					</td>
+					<td><input type="hidden" name="<?= $this->controller ?>[tipo_uso][]" value="<?= $_POST[tipo_uso] ?>">
+						<?= $model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido') ?>
+					</td>
 					<td><input type="hidden" name="<?= $this->controller ?>[lote][]" value="<?= $_POST[lote] ?>">
 						<?= $_POST[lote] ?>
 					</td>

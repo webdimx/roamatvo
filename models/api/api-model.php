@@ -11,6 +11,8 @@ class ApiModel extends MainController
 
 	public $transaction;
 
+	public $registrations;
+
 
 	public function __construct($db = false)
 	{
@@ -23,6 +25,7 @@ class ApiModel extends MainController
 		$this->tableMdn = 'wd_mdns';
 
 		$this->transaction = $this->load_model('transacoes/transacoes-model');
+		$this->registrations = $this->load_model('cadastros/cadastros-model');
 
 
 		self::checkCredentials();
@@ -66,11 +69,25 @@ class ApiModel extends MainController
 		$transaction = $this->transaction->setTransaction($this->data);
 
 		header("HTTP/1.0 201 Created");
-		$this->response["transaction_id"] = $transaction;
 		$this->response["status"] = true;
+		$this->response["transaction_id"] = $transaction;
 		$this->response["message"] = "Transaction created successfully!";
 		echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
 
+
+	}
+
+
+	public function getCountries()
+	{
+
+		$this->validateTransaction();
+		$country = $this->registrations->getCountries();
+
+		header("HTTP/1.0 200 Ok");
+		$this->response["status"] = true;
+		$this->response["data"] = $country;
+		echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
 
 	}
 

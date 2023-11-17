@@ -33,6 +33,11 @@ class ApiController extends MainController
 		$this->api->checkMethod('POST');
 		$this->api->setTransaction();
 	}
+	public function country()
+	{
+		$this->api->checkMethod('GET');
+		$this->api->getCountries();
+	}
 
 
 
