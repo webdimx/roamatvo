@@ -205,9 +205,9 @@ endif;
                     ?>
                   </select></td>
                 <td align="center" style="vertical-align: middle">
-                  <button type="button" class="add" style="border:none;border-radius:50%;background-color:#D15B47;color:#fff;width: 25px;
+                  <button type="button" class="add" style="border:none;border-radius:50%;background-color:#629B58;color:#fff;width: 25px;
     height: 25px;"><i class="fa fa-plus"></i></button>
-                  <button type="button" class="remove" style="border:none;border-radius:50%;background-color:#629B58;color:#fff;width: 25px;
+                  <button type="button" class="remove" style="border:none;border-radius:50%;background-color:#D15B47;color:#fff;width: 25px;
     height: 25px;"><i class="fa fa-remove"></i></button>
                 </td>
               </tr>
