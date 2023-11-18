@@ -116,11 +116,7 @@ class ApiModel extends MainController
 
 		}
 
-		if (
-			!$this->validaPhone($this->data->phone)
-		) {
-			$this->setBadRequest("The field phone is invalid!");
-		}
+
 
 		if (
 			!$this->validateEmail($this->data->email)
@@ -134,13 +130,23 @@ class ApiModel extends MainController
 			$this->setBadRequest("The date format is not valid!");
 		}
 
+		if (
+			!$this->validatePlan($this->data->code)
+		) {
+			$this->setBadRequest("The code not exists!");
+		}
+
 
 	}
 
-	public function validaPhone($phone)
+	public function validatePlan($plano)
 	{
-		$phone = str_replace('55', '', $phone);
-		return preg_match("/^([14689][0-9]|2[12478]|3([1-5]|[7-8])|5([13-5])|7[193-7])9[0-9]{8}$/", $phone);
+
+		$query = $this->db->query("SELECT count(*) as total  FROM wd_planos where codigo_plano = '$plano' ");
+		$total = $query->fetch();
+
+		return $total['total'];
+
 	}
 
 	public function validateEmail($email)
@@ -183,6 +189,7 @@ class ApiModel extends MainController
 		header("HTTP/1.0 400 Bad Request");
 		$this->response["status"] = false;
 		$this->response["error"] = $message;
+		echo json_encode($this->response);
 		exit();
 
 	}
