@@ -68,12 +68,16 @@ class ApiModel extends MainController
 		$this->validateTransaction();
 		$transaction = $this->transaction->setTransaction($this->data);
 
-		header("HTTP/1.0 201 Created");
-		$this->response["status"] = true;
-		$this->response["transaction_id"] = $transaction;
-		$this->response["message"] = "Transaction created successfully!";
-		echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
+		if ($transaction) {
+			header("HTTP/1.0 201 Created");
+			$this->response["status"] = true;
+			$this->response["transaction_id"] = $transaction;
+			$this->response["message"] = "Transaction created successfully!";
+			echo json_encode($this->response, JSON_UNESCAPED_UNICODE);
+			exit();
+		}
 
+		$this->setBadRequest("Thistransaction cannot be created, please contact support!");
 
 	}
 
@@ -116,7 +120,11 @@ class ApiModel extends MainController
 
 		}
 
-
+		if (
+			!$this->validateSimcard($this->data->simcard)
+		) {
+			$this->setBadRequest("The simcard not exists!");
+		}
 
 		if (
 			!$this->validateEmail($this->data->email)
@@ -145,6 +153,15 @@ class ApiModel extends MainController
 		$query = $this->db->query("SELECT count(*) as total  FROM wd_planos where codigo_plano = '$plano' ");
 		$total = $query->fetch();
 
+		return $total['total'];
+
+	}
+
+	public function validateSimcard($simcard)
+	{
+
+		$query = $this->db->query("SELECT count(*) as total  FROM wd_simcards where simcard = '$simcard' ");
+		$total = $query->fetch();
 		return $total['total'];
 
 	}
