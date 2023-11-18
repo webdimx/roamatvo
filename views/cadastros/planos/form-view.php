@@ -160,7 +160,8 @@ endif;
           <thead>
             <tr role="row">
               <th class="center" rowspan="1" colspan="1" width="20"><label class="pos-rel"></th>
-              <th rowspan="1" colspan="1">Quantidade</th>
+              <th rowspan="1" colspan="1">Nome</th>
+              <th rowspan="1" colspan="1">Capacidade</th>
               <th rowspan="1" colspan="1">Código</th>
               <th rowspan="1" colspan="1">Descrição</th>
               <th rowspan="1" colspan="1">Fornecedor</th>
@@ -180,8 +181,12 @@ endif;
                 <td align="center" style="vertical-align: middle">
                   <input type="radio" value="1" name="<?= $this->controller ?>[preferencial][]" <?= ($data[preferencial] ? 'checked' : '') ?>>
                 <td>
+                  <input type="text" name="<?= $this->controller ?>[opcao_nome][]" class="col-xs-12 col-sm-12 col-lg-12 "
+                    value="<?= $data[nome] ?>">
+                </td>
+                <td>
                   <input type="text" name="<?= $this->controller ?>[quantidade][]" class="col-xs-12 col-sm-12 col-lg-12 "
-                    maxlength="2" value="<?= $data[quantidade] ?>">
+                    value="<?= $data[quantidade] ?>">
                 </td>
                 <td>
                   <input type="text" name="<?= $this->controller ?>[codigocmovel][]"

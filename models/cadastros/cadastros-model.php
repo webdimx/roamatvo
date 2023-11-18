@@ -1513,7 +1513,19 @@ class CadastrosModel extends MainController
 		if ($table == 'planos'):
 
 
-			$query = $this->db->query('SELECT a.*, b.local as local_uso, c.nome as fornecedor  FROM `' . $this->tablePlanos . '` a LEFT Join `' . $this->tableLocalUso . '` b ON a.local_uso = b.ID LEFT Join `' . $this->tableFornecedores . '` c ON a.fornecedor = c.ID  ' . $qs . '  ORDER BY a.nome ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
+
+
+			$query = $this->db->query('SELECT
+				a.*, b.nome as pais,
+				c.nome as continente,
+				(select nome from wd_planos_opcoes where id_plano = a.ID and preferencial = "1" )  as preferencial,
+				(SELECT ob.nome from wd_planos_opcoes oa LEFT JOIN wd_fornecedores ob ON oa.fornecedor = ob.ID where id_plano = a.ID and preferencial = "1" ) as fornecedor
+				FROM `' . $this->tablePlanos . '` a
+				LEFT Join `' . $this->tablePaises . '` b ON a.pais = b.ID
+				LEFT Join `' . $this->tableContinentes . '` c ON a.continente = c.ID  ' . $qs . '
+				ORDER BY a.nome ASC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
+
+
 			$count = $this->db->query('SELECT a.*  FROM `' . $this->tablePlanos . '` a ' . $qs . ' ORDER BY nome ASC');
 
 
@@ -2995,6 +3007,7 @@ class CadastrosModel extends MainController
 		foreach ($this->form_data['quantidade'] as $fields) {
 
 			array_push($opcoes, [
+				'nome' => $this->form_data['opcao_nome'][$i],
 				'preferencial' => $this->form_data['preferencial'][$i],
 				'quantidade' => $this->form_data['quantidade'][$i],
 				'codigo' => $this->form_data['codigocmovel'][$i],
