@@ -561,8 +561,8 @@ class TransacoesModel extends MainController
 		b.valor as valor_plano,
 		date_format(a.data_nota, "%d/%m/%Y %H:%iHs") as data_nota,
 		date_format(a.data_cancelamento, "%d/%m/%Y") as cancelamento,
-		if(documento, documento, cnpj) as documento
-
+		if(documento, documento, cnpj) as documento,
+		p.nome as continente
 
 
 
@@ -583,7 +583,7 @@ class TransacoesModel extends MainController
 	    LEFT JOIN wd_mdns m ON  a.mdn = m.mdn
 		LEFT JOIN wd_status_mdn n ON m.status = n.ID
 		LEFT JOIN wd_status_simcard o ON c.status = o.ID
-
+		LEFT JOIN wd_continentes p on b.continente = p.ID
 
 
 		' . $qs . ' ORDER BY ID DESC ' . ($page ? "LIMIT " . ($page - 1) * 20 . ",20" : "") . '');
@@ -884,7 +884,7 @@ class TransacoesModel extends MainController
 		date_format(a.data_nota, "%d/%m/%Y %H:%iHs") as data_nota,
 		date_format(a.data_cancelamento, "%d/%m/%Y") as cancelamento,
 		if(documento, documento, cnpj) as documento
-
+		p.nome as continente
 
 
 
@@ -904,7 +904,9 @@ class TransacoesModel extends MainController
 		LEFT JOIN wd_moedas l on a.moeda = l.ID
 	    LEFT JOIN wd_mdns m ON  a.mdn = m.mdn
 		LEFT JOIN wd_status_mdn n ON m.status = n.ID
-		LEFT JOIN wd_status_simcard o ON c.status = o.ID
+		LEFT JOIN wd_status_simcard o ON c.status = o.ID,
+		LEFT JOIN wd_continentes p on b.continente = p.ID
+
 
 
 
@@ -1728,9 +1730,9 @@ class TransacoesModel extends MainController
 
 					/*case"helpdesk":
 
-																																																																											$qs .= "status = '3' and ";
+																																																																																		 $qs .= "status = '3' and ";
 
-																																																																											break;*/
+																																																																																		 break;*/
 
 					case "nota_d":
 
@@ -2048,15 +2050,15 @@ class TransacoesModel extends MainController
 
 					/*case"helpdesk":
 
-																																																																											$qs .= "status = '3' and ";
+																																																																																		 $qs .= "status = '3' and ";
 
-																																																																											break;
+																																																																																		 break;
 
-																																																																										case"helpdesk":
+																																																																																	 case"helpdesk":
 
-																																																																											$qs .= "status = '3' and ";
+																																																																																		 $qs .= "status = '3' and ";
 
-																																																																											break;*/
+																																																																																		 break;*/
 
 
 					case "nota_d":
@@ -2105,25 +2107,25 @@ class TransacoesModel extends MainController
 
 		/*echo "SELECT
 
-																														$f
+																																	$f
 
 
-																														FROM wd_transacoes a
+																																	FROM wd_transacoes a
 
-																														LEFT JOIN wd_simcards c ON  a.iccid = c.simcard
-																														LEFT JOIN wd_mdns o ON  a.mdn = o.mdn
-																														LEFT JOIN wd_planos b ON a.plano = b.ID
-																														LEFT JOIN wd_fornecedores e ON a.fornecedor_simcard = e.ID
-																														LEFT JOIN wd_fornecedores f ON a.fornecedor_mdn = f.ID
-																														LEFT JOIN wd_atendentes g ON a.atendente = g.ID
-																														LEFT JOIN wd_local_de_venda h on a.local_venda = h.ID
-																														LEFT JOIN wd_ponto_de_venda i ON a.ponto_venda = i.ID
-																														LEFT JOIN wd_local_de_uso j ON a.local_uso = j.ID
-																														LEFT JOIN wd_formas_pagamento k ON a.forma_pagamento = k.ID
-																														LEFT JOIN wd_status_simcard m on c.status = m.ID
-																														LEFT JOIN wd_status_mdn n on o.status = n.ID
+																																	LEFT JOIN wd_simcards c ON  a.iccid = c.simcard
+																																	LEFT JOIN wd_mdns o ON  a.mdn = o.mdn
+																																	LEFT JOIN wd_planos b ON a.plano = b.ID
+																																	LEFT JOIN wd_fornecedores e ON a.fornecedor_simcard = e.ID
+																																	LEFT JOIN wd_fornecedores f ON a.fornecedor_mdn = f.ID
+																																	LEFT JOIN wd_atendentes g ON a.atendente = g.ID
+																																	LEFT JOIN wd_local_de_venda h on a.local_venda = h.ID
+																																	LEFT JOIN wd_ponto_de_venda i ON a.ponto_venda = i.ID
+																																	LEFT JOIN wd_local_de_uso j ON a.local_uso = j.ID
+																																	LEFT JOIN wd_formas_pagamento k ON a.forma_pagamento = k.ID
+																																	LEFT JOIN wd_status_simcard m on c.status = m.ID
+																																	LEFT JOIN wd_status_mdn n on o.status = n.ID
 
-																														LEFT JOIN wd_moedas l on a.moeda = l.ID  $qs group by a.iccid order by data_transacao asc ";*/
+																																	LEFT JOIN wd_moedas l on a.moeda = l.ID  $qs group by a.iccid order by data_transacao asc ";*/
 
 		$query = $this->db->query("SELECT
 
@@ -2217,15 +2219,15 @@ class TransacoesModel extends MainController
 
 			/*if($_data[plano]==43 || $_data[plano]==42):
 
-																																															$repatriar =  $this->repatriar($_data[dias]);
+																																																			 $repatriar =  $this->repatriar($_data[dias]);
 
-																																												 endif;
+																																																	endif;
 
-																																												 if($repatriar):
+																																																	if($repatriar):
 
-																																													 $data = $repatriar;
+																																																		$data = $repatriar;
 
-																																												 endif;*/
+																																																	endif;*/
 
 
 			//if($data):
@@ -2356,8 +2358,8 @@ class TransacoesModel extends MainController
 		m.lote as lote_mdn,
 		(b.valor-a.valor_plano) as desconto_plano,
 		a.valor_plano as final_plano,
-		b.valor as valor_plano
-
+		b.valor as valor_plano,
+    p.nome as continente
 
 
 		FROM ' . $this->table . ' a
@@ -2375,6 +2377,7 @@ class TransacoesModel extends MainController
 	    LEFT JOIN wd_mdns m ON  a.mdn = m.mdn
 		LEFT JOIN wd_status_mdn n ON m.status = n.ID
 		LEFT JOIN wd_status_simcard o ON c.status = o.ID
+		LEFT JOIN wd_continentes p on b.continente = p.ID
 
 		 where ID  = ' . $_GET[ID] . ' ');
 

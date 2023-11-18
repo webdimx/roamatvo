@@ -277,6 +277,9 @@ $_attributes = $model->getList($this->type);
 							<?= $_item[plano] ?>
 						</td>
 						<td>
+							<?= $_item[continente] ?>
+						</td>
+						<td>
 							<?= $_item[consumo] ?>
 						</td>
 						<td>
@@ -328,33 +331,7 @@ $_attributes = $model->getList($this->type);
 							<?= ($_item[ocorrencia] == 1 ? 'Venda' : 'Cortesia') ?>
 						</td>
 
-						<td>
-							<?
-							switch ($_item[origem]):
 
-								case "1":
-									echo 'PAINEL';
-									break;
-
-								case "2":
-									echo 'SITE';
-									break;
-
-								case "3":
-									echo 'AERO';
-									break;
-
-								case "4":
-									echo 'CORP';
-									break;
-
-								case "5":
-									echo 'HD';
-									break;
-
-							endswitch;
-							?>
-						</td>
 						<? //($_item[origem]==2?$_item[ponto_venda]:($_item[origem]==4?$_item[ponto_venda]:$_item[detalhe]))?>
 						<td>
 							<?= ($_item[origem] == 2 ? $_item[ponto_venda] : ($_item[origem] == 4 ? $_item[ponto_venda] : $_item[detalhe])) ?>
