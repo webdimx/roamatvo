@@ -129,7 +129,7 @@ class HomeModel extends MainController
 	public function reportMdn()
 	{
 
-		$query = $this->db->query("select  b.nome, if(a.fornecedor=6, count(*), count(*)) as total, (select count(*) from wd_mdns where status = 6 and fornecedor = a.fornecedor) as ativo, (select count(*) from wd_mdns where status = 1 and fornecedor = a.fornecedor) as estoque from wd_mdns a left join wd_fornecedores b on a.fornecedor = b.ID where fornecedor in(7,6, 42, 46) and dashboard is null  group by fornecedor;");
+		$query = $this->db->query("select  b.nome, if(a.fornecedor=6, count(*), count(*)) as total, (select count(*) from wd_mdns where status = 6 and fornecedor = a.fornecedor) as ativo, (select count(*) from wd_mdns where status = 1 and fornecedor = a.fornecedor) as estoque from wd_mdns a left join wd_fornecedores b on a.fornecedor = b.ID where  dashboard is null  group by fornecedor;");
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 
 	}
