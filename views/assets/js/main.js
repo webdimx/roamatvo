@@ -1838,7 +1838,7 @@ $(document).ready(function(){
 			setTimeout(function(){
 
 				window.location=controllerUrl+subController
-				//javascript:history.back()
+				javascript:history.back()
 
 			},500)
 
@@ -1862,7 +1862,7 @@ $(document).ready(function(){
 
 			setTimeout(function(){
 
-				//javascript:history.back()
+				javascript:history.back()
 
 			},500)
 
@@ -2131,8 +2131,6 @@ $(document).ready(function(){
 
 
 		$.post(ajaxUrl+controller+'/delRegistry', {ids: $ids.slice(0, -1), 'table': $(this).data('table')}, function(a){
-
-
 
 
 			if(a=='alert1'){
