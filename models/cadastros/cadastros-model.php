@@ -2557,7 +2557,7 @@ class CadastrosModel extends MainController
 
 			case "wd_fornecedores":
 
-				$query = $this->db->query("SELECT Count(*) as total  from $this->tableMdn where fornecedor = '$id' or fornecedor_mdn = '$id' ");
+				$query = $this->db->query("SELECT Count(*) as total  from $this->tableMdn where fornecedor = '$id' ");
 				$count = $query->fetch();
 				return $count[total];
 
@@ -2620,14 +2620,6 @@ class CadastrosModel extends MainController
 				break;
 
 
-
-			case "wd_local_de_estoque":
-
-				$query = $this->db->query("SELECT Count(*) as total  from $this->tableMdn where local_estoque = '$id' ");
-				$count = $query->fetch();
-				return $count[total];
-
-				break;
 
 			case "wd_formas_pagamento":
 

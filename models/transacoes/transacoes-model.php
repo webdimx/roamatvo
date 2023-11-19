@@ -626,7 +626,7 @@ class TransacoesModel extends MainController
 	}
 
 
-	public function getList30($yes, $helpdesk, $reembolso, $cancelamento, $prorrogacao, $controle)
+	public function getList30($yes = NULL, $helpdesk = NULL, $reembolso = NULL, $cancelamento = NULL, $prorrogacao = NULL, $controle = NULL)
 	{
 
 		$_GET[status_nota] = $_POST[status_nota];
@@ -882,7 +882,7 @@ class TransacoesModel extends MainController
 		b.valor as valor_plano,
 		date_format(a.data_nota, "%d/%m/%Y %H:%iHs") as data_nota,
 		date_format(a.data_cancelamento, "%d/%m/%Y") as cancelamento,
-		if(documento, documento, cnpj) as documento
+		if(documento, documento, cnpj) as documento,
 		p.nome as continente
 
 
@@ -903,7 +903,7 @@ class TransacoesModel extends MainController
 		LEFT JOIN wd_moedas l on a.moeda = l.ID
 	    LEFT JOIN wd_mdns m ON  a.mdn = m.mdn
 		LEFT JOIN wd_status_mdn n ON m.status = n.ID
-		LEFT JOIN wd_status_simcard o ON c.status = o.ID,
+		LEFT JOIN wd_status_simcard o ON c.status = o.ID
 		LEFT JOIN wd_continentes p on b.continente = p.ID
 
 
@@ -1325,7 +1325,7 @@ class TransacoesModel extends MainController
 	}
 
 
-	public function cancel($id)
+	public function cancel($id = NULL)
 	{
 
 		$id = ($id ? $id : $_POST[ID]);
@@ -1338,7 +1338,7 @@ class TransacoesModel extends MainController
 
 				'tipo' => 3,
 				'status' => 3,
-				'responsavel_cancelamento' => $_POST[responsavel],
+				'responsavel_cancelamento' => $_POST['responsavel'],
 				'data_cancelamento' => date('Y-m-d H:i:s'),
 				//'data_off' => date('Y-m-d').' 00:00:00',
 
@@ -1504,7 +1504,7 @@ class TransacoesModel extends MainController
 
 	}
 
-	public function importTransaction($id, $yes)
+	public function importTransaction($id = NULL, $yes = NULL)
 	{
 
 		if ($yes):
@@ -1550,7 +1550,7 @@ class TransacoesModel extends MainController
 		if(adiar, date_format(date(data_off) + Interval  adiar day, '%d/%m/%Y'), 'Não adiada') as 'Data Off Prorrogada',
 		b.valor as 'Valor do Plano',
 		(b.valor-a.valor_plano) as 'Desconto do Plano',
-		a.valor_plano as 'Valor Final do Plano'
+		a.valor_plano as 'Valor Final do Plano',
 		if(g.area_atuacao=1, \"AERO\", if(g.area_atuacao=2, \"HD\", \"\") ) as 'Local de Atuação',
 
 
@@ -1729,9 +1729,9 @@ class TransacoesModel extends MainController
 
 					/*case"helpdesk":
 
-																																																																																																				$qs .= "status = '3' and ";
+																																																																																																																								$qs .= "status = '3' and ";
 
-																																																																																																				break;*/
+																																																																																																																								break;*/
 
 					case "nota_d":
 
@@ -2049,15 +2049,15 @@ class TransacoesModel extends MainController
 
 					/*case"helpdesk":
 
-																																																																																																				$qs .= "status = '3' and ";
+																																																																																																																								$qs .= "status = '3' and ";
 
-																																																																																																				break;
+																																																																																																																								break;
 
-																																																																																																			case"helpdesk":
+																																																																																																																							case"helpdesk":
 
-																																																																																																				$qs .= "status = '3' and ";
+																																																																																																																								$qs .= "status = '3' and ";
 
-																																																																																																				break;*/
+																																																																																																																								break;*/
 
 
 					case "nota_d":
@@ -2106,25 +2106,25 @@ class TransacoesModel extends MainController
 
 		/*echo "SELECT
 
-																																								$f
+																																																$f
 
 
-																																								FROM wd_transacoes a
+																																																FROM wd_transacoes a
 
-																																								LEFT JOIN wd_simcards c ON  a.iccid = c.simcard
-																																								LEFT JOIN wd_mdns o ON  a.mdn = o.mdn
-																																								LEFT JOIN wd_planos b ON a.plano = b.ID
-																																								LEFT JOIN wd_fornecedores e ON a.fornecedor_simcard = e.ID
-																																								LEFT JOIN wd_fornecedores f ON a.fornecedor_mdn = f.ID
-																																								LEFT JOIN wd_atendentes g ON a.atendente = g.ID
-																																								LEFT JOIN wd_local_de_venda h on a.local_venda = h.ID
-																																								LEFT JOIN wd_ponto_de_venda i ON a.ponto_venda = i.ID
-																																								LEFT JOIN wd_local_de_uso j ON a.local_uso = j.ID
-																																								LEFT JOIN wd_formas_pagamento k ON a.forma_pagamento = k.ID
-																																								LEFT JOIN wd_status_simcard m on c.status = m.ID
-																																								LEFT JOIN wd_status_mdn n on o.status = n.ID
+																																																LEFT JOIN wd_simcards c ON  a.iccid = c.simcard
+																																																LEFT JOIN wd_mdns o ON  a.mdn = o.mdn
+																																																LEFT JOIN wd_planos b ON a.plano = b.ID
+																																																LEFT JOIN wd_fornecedores e ON a.fornecedor_simcard = e.ID
+																																																LEFT JOIN wd_fornecedores f ON a.fornecedor_mdn = f.ID
+																																																LEFT JOIN wd_atendentes g ON a.atendente = g.ID
+																																																LEFT JOIN wd_local_de_venda h on a.local_venda = h.ID
+																																																LEFT JOIN wd_ponto_de_venda i ON a.ponto_venda = i.ID
+																																																LEFT JOIN wd_local_de_uso j ON a.local_uso = j.ID
+																																																LEFT JOIN wd_formas_pagamento k ON a.forma_pagamento = k.ID
+																																																LEFT JOIN wd_status_simcard m on c.status = m.ID
+																																																LEFT JOIN wd_status_mdn n on o.status = n.ID
 
-																																								LEFT JOIN wd_moedas l on a.moeda = l.ID  $qs group by a.iccid order by data_transacao asc ";*/
+																																																LEFT JOIN wd_moedas l on a.moeda = l.ID  $qs group by a.iccid order by data_transacao asc ";*/
 
 		$query = $this->db->query("SELECT
 
@@ -2218,15 +2218,15 @@ class TransacoesModel extends MainController
 
 			/*if($_data[plano]==43 || $_data[plano]==42):
 
-																																																														$repatriar =  $this->repatriar($_data[dias]);
+																																																																										$repatriar =  $this->repatriar($_data[dias]);
 
-																																																											 endif;
+																																																																							 endif;
 
-																																																											 if($repatriar):
+																																																																							 if($repatriar):
 
-																																																												 $data = $repatriar;
+																																																																								 $data = $repatriar;
 
-																																																											 endif;*/
+																																																																							 endif;*/
 
 
 			//if($data):
