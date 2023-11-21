@@ -18,17 +18,15 @@ endif;
 			<div class="content">
 
 
-
 				<div class="row">
 
 					<div class="col-lg-12 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Local:</label><br>
-							<input type="text" name="<?= $this->controller ?>[local]" class="col-xs-12 col-sm-12 col-lg-12 required"
-								value="<?= $data[nome] ?>">
+							<input type="text" name="<?= $this->controller ?>[nome]" class="col-xs-12 col-sm-12 col-lg-12 required"
+ value="<?= $data[nome] ?>">
 						</p>
 					</div>
-
 
 
 					<div class="col-lg-12 ">
@@ -57,32 +55,26 @@ endif;
 
 
 							<label>
-								<input name="<?= $this->controller ?>[situacao]" type="radio" class="ace" value="1"
-									<?= ($data[situacao] == 1 || !$data[situacao] ? 'checked' : '') ?>>
-								<span class="lbl"> Ativo</span>
+								<input name="<?= $this->controller ?>[situacao]" type="radio" class="ace" value="1" <?= ($data[situacao] == 1 || !$data[situacao] ? 'checked' : '') ?>>
+								<span class="lbl">
+									Ativo</span>
 							</label>
 							<label>
-								<input name="<?= $this->controller ?>[situacao]" type="radio" class="ace" value="2"
-									<?= ($data[situacao] == 2 ? 'checked' : '') ?>>
-								<span class="lbl"> Inativo</span>
+								<input name="<?= $this->controller ?>[situacao]" type="radio" class="ace" value="2" <?= ($data[situacao] == 2 ? 'checked' : '') ?>>
+								<span class="lbl">
+									Inativo</span>
 							</label>
 
 						</p>
 					</div>
-
 
 
 					<div class="col-lg-12">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Observação:</label><br>
-							<input type="text" name="<?= $this->controller ?>[observacao]" class="col-xs-12 col-sm-12 col-lg-12"
-								maxlength="50" value="<?= $data[observacao] ?>">
+							<input type="text" name="<?= $this->controller ?>[observacao]" class="col-xs-12 col-sm-12 col-lg-12" maxlength="50" value="<?= $data[observacao] ?>">
 						</p>
 					</div>
-
-
-
-
 
 
 					<p>&nbsp;</p>
@@ -104,3 +96,4 @@ endif;
 	</div>
 
 </div>
+
