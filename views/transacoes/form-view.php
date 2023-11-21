@@ -128,17 +128,17 @@ endif;
 					</div>
 
 					<!--<div class="col-lg-3">
-													<p>
-														<label class="control-label no-padding-right" for="form-field-1">Tipo:</label><br>
-										<select name="<?= $this->controller ?>[tipo]" class="col-xs-12 col-sm-12 col-lg-12 required">
-										<option value="1" <?= ($data[tipo] == 1 || !$data[tipo] ? 'selected' : '') ?>>Venda</option>
-										<option value="2" <?= ($data[tipo] == 2 ? 'selected' : '') ?>>Desativação</option>
-										<option value="3" <?= ($data[tipo] == 3 ? 'selected' : '') ?>>Cancelamento</option>
-										<option value="4" <?= ($data[tipo] == 4 ? 'selected' : '') ?>>Troca</option>
-										<option value="5" <?= ($data[tipo] == 5 ? 'selected' : '') ?>>Ampliação de Plano</option>
-										</select>
-													</p>
-												</div>-->
+																																																<p>
+																																																	<label class="control-label no-padding-right" for="form-field-1">Tipo:</label><br>
+																																													<select name="<?= $this->controller ?>[tipo]" class="col-xs-12 col-sm-12 col-lg-12 required">
+																																													<option value="1" <?= ($data[tipo] == 1 || !$data[tipo] ? 'selected' : '') ?>>Venda</option>
+																																													<option value="2" <?= ($data[tipo] == 2 ? 'selected' : '') ?>>Desativação</option>
+																																													<option value="3" <?= ($data[tipo] == 3 ? 'selected' : '') ?>>Cancelamento</option>
+																																													<option value="4" <?= ($data[tipo] == 4 ? 'selected' : '') ?>>Troca</option>
+																																													<option value="5" <?= ($data[tipo] == 5 ? 'selected' : '') ?>>Ampliação de Plano</option>
+																																													</select>
+																																																</p>
+																																															</div>-->
 
 					<div class="col-lg-3 mt" style="<?= ($data[tipo] == 4 ? '' : 'display: none') ?>">
 						<p>
@@ -536,277 +536,302 @@ endif;
 <script>
 	$(document).ready(function () {
 
-$(".auto-complete").autocomplete({
+		$(".auto-complete").autocomplete({
 
-source: function (request, response) {
-$.ajax({
+			source: function (request, response) {
+				$.ajax({
 
-url: ajaxUrl + "/transacoes/getSim",
-dataType: "jsonp",
-data: {
-term: request.term
-},
-success: function (data) {
+					url: ajaxUrl + "/transacoes/getSim",
+					dataType: "jsonp",
+					data: {
+						term: request.term
+					},
+					success: function (data) {
 
 
-response($.map(data, function (item) {
+						response($.map(data, function (item) {
 
-return {
-label: item.simcard,
-value: item.simcard,
-abbrev: item.ID,
-for : item.fornecedor};
+							return {
+								label: item.simcard,
+								value: item.simcard,
+								abbrev: item.ID,
+								for: item.fornecedor
+							};
 
-}
-));
+						}));
 
 
-}
-}
-);
-},
-minLength : 2,
-select : function (event, ui) {
+					}
+				});
+			},
+			minLength: 2,
+			select: function (event, ui) {
 
 
-if (ui.item.abbrev == "") {
 
-return false
 
-}
+				if (ui.item.abbrev == "") {
 
-$.post(ajaxUrl + '/transacoes/getInfoSim', {
-'sim': ui.item.abbrev,
-'query': 'sim',
-'for': ui.item.for
-}, function (a) {
+					return false
 
-console.log(a)
+				}
 
+				$.post(ajaxUrl + '/transacoes/getInfoSim', { 'sim': ui.item.abbrev, 'query': 'sim', 'for': ui.item.for }, function (a) {
 
-a = $.parseJSON(a)
+					console.log(a)
 
-if (a[0].mdn) {
-$("[name='transacoes[mdn]'").val(a[0].mdn)
-$("[name='transacoes[fornecedor_simcard]'").val(a[0].fornecedor_simcard)
-$("[name='transacoes[fornecedor_mdn]'").val(a[0].fornecedor_mdn)
-} else {
 
-$("[name='transacoes[fornecedor_simcard]'").val(a[0].fornecedor_simcard)
+					a = $.parseJSON(a)
 
-}
-})
+					if (a[0].mdn) {
+						$("[name='transacoes[mdn]'").val(a[0].mdn)
+						$("[name='transacoes[fornecedor_simcard]'").val(a[0].fornecedor_simcard)
+						$("[name='transacoes[fornecedor_mdn]'").val(a[0].fornecedor_mdn)
+					}
+					else {
 
-}
+						$("[name='transacoes[fornecedor_simcard]'").val(a[0].fornecedor_simcard)
 
-}
-);
+					}
+				})
 
-$("[name='transacoes[emitir_nota]']").change(function () {
+			}
 
+		});
 
-if ($(this).val() == 1) {
+		$("[name='transacoes[emitir_nota]']").change(function () {
 
-$("[name='transacoes[documento]']").addClass('required')
 
-} else {
-$("[name='transacoes[documento]']").removeClass('required')
+			if ($(this).val() == 1) {
 
-}
+				$("[name='transacoes[documento]']").addClass('required')
 
+			}
+			else {
+				$("[name='transacoes[documento]']").removeClass('required')
 
-})$()$('#plano').change(function () {
+			}
 
 
-$.post(ajaxUrl + 'cadastros/getPlano', {
-ID: $(this).val()
-}, function (a) {
+		})
 
-$a = $("[name='transacoes[data_ativacao]']").val().split('/')
+		$()
 
-a = $.parseJSON(a)
+		$('#plano').change(function () {
 
-$b = new Date($a[2], $a[1] - 1, parseInt($a[0]) + (parseInt(a.plano.qtd_dias) - 1), 0, 0, 0)
 
 
-$("[name='transacoes[data_off]']").val(("0" + $b.getDate()).slice(-2) + '/' + (
-"0" + (
-$b.getMonth() + 1
-)
-).slice(-2) + '/' + $b.getFullYear())
 
-$("[name='transacoes[dias_uso]']").val(a.plano.qtd_dias)
-$("[name='transacoes[valor_plano]']").val(a.plano.valor.replace(',', '.'))
-$("[name='transacoes[local_uso]'] option:not(:selected)").attr('disabled', true)
+			$.post(ajaxUrl + 'cadastros/getPlano', { ID: $(this).val() }, function (a) {
 
+				$a = $("[name='transacoes[data_ativacao]']").val().split('/')
 
-})
+				a = $.parseJSON(a)
 
+				$b = new Date($a[2], $a[1] - 1, parseInt($a[0]) + (parseInt(a.plano.qtd_dias) - 1), 0, 0, 0)
 
-})$("[name='transacoes[desconto]']").blur(function () {
 
-$vc = ($("[name='transacoes[valor_plano]']").val().replace(',', '.') - $(this).val().replace(',', '.'))
+				$("[name='transacoes[data_off]']").val(("0" + $b.getDate()).slice(-2) + '/' + ("0" + ($b.getMonth() + 1)).slice(-2) + '/' + $b.getFullYear())
 
 
-})$("[name='transacoes[local_venda]']").change(function () {
+				$("[name='transacoes[dias_uso]']").val(a.plano.qtd_dias)
+				$("[name='transacoes[valor_plano]']").val(a.plano.valor.replace(',', '.'))
 
 
-$("[name='transacoes[ponto_venda]']").html('')
 
-$.post(ajaxUrl + 'cadastros/getPonto', {
-ID: $(this).val()
-}, function (a) {
 
-if (a) {
 
-b = JSON.parse(a)
+			})
 
-if (b.length > 1) {
 
-$("[name='transacoes[ponto_venda]']").append($('<option>').attr('value', '').html('Selecione'))
 
-}
+		})
 
 
-b.forEach(function (item, index) {
+		$("[name='transacoes[desconto]']").blur(function () {
 
+			$vc = ($("[name='transacoes[valor_plano]']").val().replace(',', '.') - $(this).val().replace(',', '.'))
 
-$("[name='transacoes[ponto_venda]']").append($('<option>').attr('value', item.ID).html(item.ponto))
 
 
-})
 
 
-}
 
-})
+		})
 
-})$("[name='transacoes[fornecedor_mdn]']").change(function () {
+		$("[name='transacoes[local_venda]']").change(function () {
 
-if ($("[name='transacoes[mdn]']").val() == "") {
 
+			$("[name='transacoes[ponto_venda]']").html('')
 
-$.post(ajaxUrl + '/transacoes/getInfoSim', {
-'sim': $(this).val(),
-'query': 'fornecedor'
-}, function (a) {
+			$.post(ajaxUrl + 'cadastros/getPonto', { ID: $(this).val() }, function (a) {
 
-a = $.parseJSON(a)
+				if (a) {
 
-$("[name='transacoes[mdn]'").val(a[0].mdn)
+					b = JSON.parse(a)
 
-})
+					if (b.length > 1) {
 
-}
+						$("[name='transacoes[ponto_venda]']").append($('<option>').attr('value', '').html('Selecione'))
 
-})$("[name='transacoes[fornecedor_mdn]']").change(function () {
+					}
 
-if ($("[name='transacoes[mdn]']").val() == "") {
 
 
-$.post(ajaxUrl + '/transacoes/getInfoSim', {
-'sim': $(this).val(),
-'query': 'fornecedor'
-}, function (a) {
+					b.forEach(function (item, index) {
 
-a = $.parseJSON(a)
 
-$("[name='transacoes[mdn]'").val(a[0].mdn)
 
-})
+						$("[name='transacoes[ponto_venda]']").append($('<option>').attr('value', item.ID).html(item.ponto))
 
-}
 
-})$("[name='transacoes[planos]']").change(function () {
+					})
 
 
-if ($("[name='transacoes[fornecedor_mdn]']").val() == "") {
 
+				}
 
-$.post(ajaxUrl + '/transacoes/getInfoSim', {
-'sim': $(this).val(),
-'query': 'plano'
-}, function (a) {
+			})
 
-a = $.parseJSON(a)
+		})
 
-$("[name='transacoes[mdn]'").val(a[0].mdn)
-$("[name='transacoes[fornecedor_mdn]'").val(a[0].fornecedor_mdn).addClass('disabled')
-$("[name='transacoes[fornecedor_mdn]'] option:not(:selected)").attr('disabled', true)
+		$("[name='transacoes[fornecedor_mdn]']").change(function () {
 
-})
+			if ($("[name='transacoes[mdn]']").val() == "") {
 
-}
 
-})$("[name='transacoes[data_ativacao]']").change(function () {
+				$.post(ajaxUrl + '/transacoes/getInfoSim', { 'sim': $(this).val(), 'query': 'fornecedor' }, function (a) {
 
-if ($("[name='transacoes[dias_uso]']").val()) {
+					a = $.parseJSON(a)
 
-$a = $(this).val().split('/')
+					$("[name='transacoes[mdn]'").val(a[0].mdn)
 
-$b = new Date($a[2], $a[1] - 1, parseInt($a[0]) + parseInt($("[name='transacoes[dias_uso]']").val()), 0, 0, 0)
+				})
 
+			}
 
-$("[name='transacoes[data_off]']").val(("0" + $b.getDate()).slice(-2) + '/' + (
-"0" + (
-$b.getMonth() + 1
-)
-).slice(-2) + '/' + $b.getFullYear())
-}
+		})
 
-})$("[name='transacoes[tipo]']").change(function () {
+		$("[name='transacoes[fornecedor_mdn]']").change(function () {
 
+			if ($("[name='transacoes[mdn]']").val() == "") {
 
-if ($(this).val() == 4) {
 
-$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
-$('.mt, .ma').hide()
-$('.mt').show()
+				$.post(ajaxUrl + '/transacoes/getInfoSim', { 'sim': $(this).val(), 'query': 'fornecedor' }, function (a) {
 
-$('.mt select, .mt input').addClass('required')
+					a = $.parseJSON(a)
 
-} else if ($(this).val() == 5) {
+					$("[name='transacoes[mdn]'").val(a[0].mdn)
 
-$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
-$('.mt, .ma').hide()
-$('.ma').show()
+				})
 
-$('.ma select, .ma input').addClass('required')
-} else {
+			}
 
-$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
-$('.mt, .ma').hide()
+		})
 
-}
 
+		$("[name='transacoes[planos]']").change(function () {
 
-})$("[name='transacoes[adiar]']").change(function () {
 
 
-$('.a-motive').fadeIn()
+			if ($("[name='transacoes[fornecedor_mdn]']").val() == "") {
 
-})$(".a-motive select").change(function () {
 
-$('.a-value').hide()
-$('.a-payment').hide()
+				$.post(ajaxUrl + '/transacoes/getInfoSim', { 'sim': $(this).val(), 'query': 'plano' }, function (a) {
 
-$('.a-value').find('input').val('')
+					a = $.parseJSON(a)
 
-if ($(this).val() == 1) {
+					$("[name='transacoes[mdn]'").val(a[0].mdn)
+					$("[name='transacoes[fornecedor_mdn]'").val(a[0].fornecedor_mdn).addClass('disabled')
+					$("[name='transacoes[fornecedor_mdn]'] option:not(:selected)").attr('disabled', true)
 
-$('.a-value').fadeIn()
-$('.a-payment').fadeIn()
+				})
 
-} else {
-$('.a-value').fadeIn()
-$('.a-value').find('input').val('0.00')
+			}
 
-}
+		})
 
 
-})
 
 
-}
-)</script>
 
+		$("[name='transacoes[data_ativacao]']").change(function () {
+
+			if ($("[name='transacoes[dias_uso]']").val()) {
+
+				$a = $(this).val().split('/')
+
+				$b = new Date($a[2], $a[1] - 1, parseInt($a[0]) + parseInt($("[name='transacoes[dias_uso]']").val()), 0, 0, 0)
+
+
+				$("[name='transacoes[data_off]']").val(("0" + $b.getDate()).slice(-2) + '/' + ("0" + ($b.getMonth() + 1)).slice(-2) + '/' + $b.getFullYear())
+			}
+
+		})
+
+		$("[name='transacoes[tipo]']").change(function () {
+
+
+
+			if ($(this).val() == 4) {
+
+				$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
+				$('.mt, .ma').hide()
+				$('.mt').show()
+
+				$('.mt select, .mt input').addClass('required')
+
+			}
+			else if ($(this).val() == 5) {
+
+				$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
+				$('.mt, .ma').hide()
+				$('.ma').show()
+
+				$('.ma select, .ma input').addClass('required')
+			}
+			else {
+
+				$('.mt select, .mt input, .ma select, .ma input').removeClass('required').val('')
+				$('.mt, .ma').hide()
+
+			}
+
+
+		})
+
+
+		$("[name='transacoes[adiar]']").change(function () {
+
+
+			$('.a-motive').fadeIn()
+
+		})
+
+
+		$(".a-motive select").change(function () {
+
+			$('.a-value').hide()
+			$('.a-payment').hide()
+
+			$('.a-value').find('input').val('')
+
+			if ($(this).val() == 1) {
+
+				$('.a-value').fadeIn()
+				$('.a-payment').fadeIn()
+
+			}
+			else {
+				$('.a-value').fadeIn()
+				$('.a-value').find('input').val('0.00')
+
+			}
+
+
+		})
+
+
+
+	})
+</script>

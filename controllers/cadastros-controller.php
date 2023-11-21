@@ -473,7 +473,7 @@ class cadastrosController extends MainController
 		);
 
 
-		$this->view[] = ABSPATH . '/views/cadastros/continente/form-view.php';
+		$this->view[] = ABSPATH . '/views/cadastros/paises/form-view.php';
 		require ABSPATH . '/views/_includes/2-columns-left.php';
 
 	}
@@ -1521,47 +1521,47 @@ class cadastrosController extends MainController
 
 
 
-																																																					else:
-																																																					?>
+																																																									else:
+																																																									?>
 
 
-																																																				<tr role="row" class="odd">
+																																																								<tr role="row" class="odd">
 
-																																																						 <input type="hidden" name="lote" value="1">
-																																																						<?if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-																																																						<td ><input type="hidden" name="<?=$this->controller?>[simcard][]" value="<?=$line[A]?>"><?=$line[A]?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
-																																																						<td  ><input type="hidden" name="<?=$this->controller?>[mdn][]" value="<?=$line[B]?>"><?=$line[B]?></td>
-																																																						<? endif;?>
+																																																										 <input type="hidden" name="lote" value="1">
+																																																										<?if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																																																										<td ><input type="hidden" name="<?=$this->controller?>[simcard][]" value="<?=$line[A]?>"><?=$line[A]?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
+																																																										<td  ><input type="hidden" name="<?=$this->controller?>[mdn][]" value="<?=$line[B]?>"><?=$line[B]?></td>
+																																																										<? endif;?>
 
-																																																						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-																																																						<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_simcard][]" value="<?=$_POST[fornecedor_simcard]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_simcard], 'nome')?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
-																																																						<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_mdn][]" value="<?=$_POST[fornecedor_mdn]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_mdn], 'nome')?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==3):?>
-																																																						<td  ><input type="hidden" name="<?=$this->controller?>[tipo_uso][]" value="<?=$_POST[tipo_uso]?>"><?=$model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido')?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==1  || $_POST[tipo]==3):?>
-																																																						<td ><input type="hidden" name="<?=$this->controller?>[status_mdn][]" value="<?=$_POST[status_mdn]?>"><?=$model->getDetail('status_mdn', $_POST[status_mdn], 'status')?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-																																																						<td  ><input type="hidden" name="<?=$this->controller?>[status_simcard][]" value="<?=$_POST[status_simcard]?>"><?=$model->getDetail('status_simcard', $_POST[status_simcard], 'status')?></td>
-																																																						<? endif;?>
-																																																						<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
-																																																						<td ><input type="hidden" name="<?=$this->controller?>[local_estoque][]" value="<?=$_POST[local_estoque]?>"><?=$model->getDetail('local_de_estoque', $_POST[local_estoque], 'local')?></td>
-																																																						<? endif;?>
-																																																						<td><input type="hidden" name="<?=$this->controller?>[lote][]" value="<?=$_POST[lote]?>"><?=$_POST[lote]?></td>
-																																																				</tr>
+																																																										<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																																																										<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_simcard][]" value="<?=$_POST[fornecedor_simcard]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_simcard], 'nome')?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==1 || $_POST[tipo]==3):?>
+																																																										<td  ><input type="hidden" name="<?=$this->controller?>[fornecedor_mdn][]" value="<?=$_POST[fornecedor_mdn]?>" ><?=$model->getDetail('fornecedores', $_POST[fornecedor_mdn], 'nome')?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==3):?>
+																																																										<td  ><input type="hidden" name="<?=$this->controller?>[tipo_uso][]" value="<?=$_POST[tipo_uso]?>"><?=$model->getDetail('tipo_de_uso', $_POST[tipo_uso], 'apelido')?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==1  || $_POST[tipo]==3):?>
+																																																										<td ><input type="hidden" name="<?=$this->controller?>[status_mdn][]" value="<?=$_POST[status_mdn]?>"><?=$model->getDetail('status_mdn', $_POST[status_mdn], 'status')?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																																																										<td  ><input type="hidden" name="<?=$this->controller?>[status_simcard][]" value="<?=$_POST[status_simcard]?>"><?=$model->getDetail('status_simcard', $_POST[status_simcard], 'status')?></td>
+																																																										<? endif;?>
+																																																										<? if($_POST[tipo]==2 || $_POST[tipo]==3):?>
+																																																										<td ><input type="hidden" name="<?=$this->controller?>[local_estoque][]" value="<?=$_POST[local_estoque]?>"><?=$model->getDetail('local_de_estoque', $_POST[local_estoque], 'local')?></td>
+																																																										<? endif;?>
+																																																										<td><input type="hidden" name="<?=$this->controller?>[lote][]" value="<?=$_POST[lote]?>"><?=$_POST[lote]?></td>
+																																																								</tr>
 
-																																																					<?
+																																																									<?
 
-																																																					endif;
+																																																									endif;
 
 
-																																																					*/
+																																																									*/
 
 
 
@@ -1614,8 +1614,7 @@ class cadastrosController extends MainController
 						</span>
 					</div>
 				</div>
-			</div>
-			<?
+			</div><?
 
 
 
