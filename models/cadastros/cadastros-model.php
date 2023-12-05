@@ -1439,6 +1439,12 @@ class CadastrosModel extends MainController
 
 
 
+					case "continente":
+
+						$qs .= "c.ID = '" . $search . "' and ";
+
+						break;
+
 
 					case "fornecedor_simcard":
 
@@ -1514,8 +1520,6 @@ class CadastrosModel extends MainController
 
 
 		if ($table == 'planos'):
-
-
 
 
 			$query = $this->db->query('SELECT

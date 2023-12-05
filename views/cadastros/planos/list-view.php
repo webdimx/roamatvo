@@ -32,6 +32,8 @@ $cfg = $this->getConfig();
 				</th>
 				<th rowspan="1" colspan="1">Nome<br><input type="text" class="filter" name=a|nome
 						value="<?= $_GET['a|nome'] ?>"></th>
+				<th rowspan="1" colspan="1">Código<br><input type="text" class="filter" name="codigo_plano"
+				value="<?= $_GET['codigo_plano'] ?>"></th>
 				<th rowspan="1" colspan="1">Situação<br>
 					<select name="a|situacao" class="filter">
 						<option value=""></option>
@@ -49,7 +51,7 @@ $cfg = $this->getConfig();
 						<?
 						foreach ($modelConfig->getOptions('continentes', true) as $option):
 							?>
-							<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $_GET[nome] ? 'selected' : '') ?>>
+							<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $_GET['a|ID'] ? 'selected' : '') ?>>
 								<?= $option[nome] ?>
 							</option>
 							<?
@@ -59,12 +61,12 @@ $cfg = $this->getConfig();
 				</th>
 
 				<th rowspan="1" colspan="1">País<br>
-					<select name="pais" class="filter">
+					<select name="b|ID" class="filter">
 						<option value=""></option>
 						<?
 						foreach ($modelConfig->getOptions('paises', true) as $option):
 							?>
-							<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $_GET[nome] ? 'selected' : '') ?>>
+							<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $_GET['b|ID'] ? 'selected' : '') ?>>
 								<?= $option[nome] ?>
 							</option>
 							<?
@@ -120,6 +122,9 @@ $cfg = $this->getConfig();
 								value="<?= $_item[ID] ?>"><span class="lbl"></span></label></td>
 					<td>
 						<?= $_item[nome] ?>
+					</td>
+					<td>
+						<?= $_item[codigo_plano] ?>
 					</td>
 					<td>
 						<?= ($_item[situacao] == 1 ? 'Ativo' : 'Inativo') ?>
