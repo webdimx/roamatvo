@@ -1252,6 +1252,7 @@ class CadastrosModel extends MainController
 					array(
 
 						'simcard' => chk_array($this->form_data, 'simcard'),
+						'codigo' => chk_array($this->form_data, 'codigo'),
 						'fornecedor' => chk_array($this->form_data, 'fornecedor_simcard'),
 						'status' => chk_array($this->form_data, 'status_simcard'),
 						'local_estoque' => chk_array($this->form_data, 'local_estoque'),
@@ -1323,6 +1324,7 @@ class CadastrosModel extends MainController
 							array(
 
 								'simcard' => $simcard,
+								'codigo' => $this->form_data[codigo][$x],
 								'fornecedor' => $this->form_data[fornecedor_simcard][$x],
 								'status' => $this->form_data[status_simcard][$x],
 								'local_estoque' => $this->form_data[local_estoque][$x],
@@ -1355,6 +1357,7 @@ class CadastrosModel extends MainController
 						array(
 
 							'simcard' => chk_array($this->form_data, 'simcard'),
+							'codigo' => chk_array($this->form_data, 'codigo'),
 							'fornecedor' => chk_array($this->form_data, 'fornecedor_simcard'),
 							'status' => chk_array($this->form_data, 'status_simcard'),
 							'local_estoque' => chk_array($this->form_data, 'local_estoque'),

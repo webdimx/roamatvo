@@ -33,6 +33,13 @@ endif;
           </div>
           <div class="col-lg-12 ">
             <p>
+              <label class="control-label no-padding-right" for="form-field-1">Código:</label><br>
+              <input type="text" name="<?= $this->controller ?>[codigo]" class="col-xs-12 col-sm-12 col-lg-12 required"
+                value="<?= $data[codigo] ?>">
+            </p>
+          </div>
+          <div class="col-lg-12 ">
+            <p>
               <label class="control-label no-padding-right" for="form-field-1"> Fornecedor:</label><br>
               <select name="<?= $this->controller ?>[fornecedor_simcard]"
                 class="col-xs-12 col-sm-12 col-lg-12 required">

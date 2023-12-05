@@ -91,11 +91,11 @@ $cfg = $this->getConfig();
 						?>
 					</select>
 				</th>
-				<th rowspan="1" width="100" colspan="1">Data<br><input class="form-control date-range date filter" name="data"
+				<th rowspan="1" width="10" colspan="1">Data<br><input class="form-control date-range date filter" name="data"
 						value="<?= $_GET['data'] ?>" type="text" data-date-format="dd/mm/yyyy"></th>
 				<th width="20" rowspan="1" colspan="1" align="center">Associação<br></th>
 				<th width="20" rowspan="1" colspan="1" align="center">Obs<br></th>
-				<th width="80" rowspan="1" colspan="1" align="center">Ações<br></th>
+				<th width="120" rowspan="1" colspan="1" align="center">Ações<br></th>
 			</tr>
 		</thead>
 
@@ -142,11 +142,15 @@ $cfg = $this->getConfig();
 						<?= ($_item[observacoes] ? '<button class="btn btn-xs btn-warning" data-rel="tooltip" data-placement="left" title="' . $_item[observacoes] . '"><i class="ace-icon fa fa-flag bigger-120"></i></button>' : '') ?>
 					</td>
 					<td align="center">
+						<a href="#" data-rel="tooltip" data-toggle="modal" title="Copiar Código" class="copy"
+							data-id="<?= $_item[codigo] ?>"><button class="btn btn-xs"><i
+									class="ace-icon fa fa-copy bigger-120"></i></button></a>
 						<a href="<?= HOME_URI . $this->controller . "/editar-simcard/" . $_item[ID] ?>"><button
 								class="btn btn-xs btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></button></a>
 						<a href="#" data-rel="tooltip" data-toggle="modal" title="Excluir" class="delSim"
 							data-id="<?= $_item[simcard] ?>"><button class="btn btn-xs btn-danger"><i
 									class="ace-icon fa fa-trash bigger-120"></i></button></a>
+
 					</td>
 				</tr>
 				<?
@@ -173,3 +177,19 @@ $cfg = $this->getConfig();
 
 	</div>
 </div>
+
+
+<script>
+
+	$('.copy').on('click', function (a) {
+
+		a.preventDefault()
+		a.stopPropagation()
+
+		navigator.clipboard.writeText($(this).data('id')).then();
+
+
+	})
+
+
+</script>
