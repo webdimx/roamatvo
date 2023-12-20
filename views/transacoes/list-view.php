@@ -91,6 +91,21 @@ $_attributes = $model->getList($this->type);
 
 					</th>
 
+					<th rowspan="1" colspan="1">Código do Plano<br>
+
+<select  class="filter"  name="plano_codigo   class="col-xs-12 col-sm-12 col-lg-12 required">
+<option value=""></option>
+<?
+foreach ($modelConfig->getOptions('planos', true) as $option):
+	?>
+	<option value="<?= $option['codigo'] ?>" <?= ($option['codigo'] == $_GET[plano_codigo] ? 'selected' : '') ?> > <?= $option[codigo] ?></option>
+	<?
+endforeach;
+?>
+ </select>
+
+	</th>
+
 					<th rowspan="1" colspan="1">Continente<br>
 
 						<select class="filter" name="continente" class="col-xs-12 col-sm-12 col-lg-12 required">
@@ -276,6 +291,8 @@ $_attributes = $model->getList($this->type);
 						<td>
 							<?= $_item[plano] ?>
 						</td>
+						<td><?= $_item[plano_codigo] ?></td>
+
 						<td>
 							<?= $_item[continente] ?>
 						</td>
