@@ -120,6 +120,14 @@ class ApiModel extends MainController
 
 		}
 
+		$simcard = $this->db->query("SELECT count(*) as total  FROM wd_simcards where simcard = '" . $this->data->simcard . "'  and status = 1 ");
+		$simcardCount = $simcard->fetch();
+
+		if (!$simcardCount[total]) {
+			$this->setBadRequest("The simcard already use!");
+		}
+
+
 		if (
 			!$this->validateSimcard($this->data->simcard)
 		) {
