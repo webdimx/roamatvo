@@ -120,12 +120,7 @@ class CadastrosModel extends MainController
 
 			else:
 
-				if ($this->exists($this->tablePlanos, 'nome', chk_array($this->form_data, 'nome'))):
 
-					echo $this->form_msg = 'exists';
-					return;
-
-				endif;
 
 
 				$query = $this->db->insert(
