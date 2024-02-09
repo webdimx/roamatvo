@@ -93,18 +93,20 @@ $_attributes = $model->getList($this->type);
 
 					<th rowspan="1" colspan="1">Código do Plano<br>
 
-<select  class="filter"  name="plano_codigo   class="col-xs-12 col-sm-12 col-lg-12 required">
-<option value=""></option>
-<?
-foreach ($modelConfig->getOptions('planos', true) as $option):
-	?>
-	<option value="<?= $option['codigo'] ?>" <?= ($option['codigo'] == $_GET[plano_codigo] ? 'selected' : '') ?> > <?= $option[codigo] ?></option>
-	<?
-endforeach;
-?>
- </select>
+						<select class="filter" name="plano_codigo   class=" col-xs-12 col-sm-12 col-lg-12 required">
+							<option value=""></option>
+							<?
+							foreach ($modelConfig->getOptions('planos', true) as $option):
+								?>
+								<option value="<?= $option['codigo'] ?>" <?= ($option['codigo'] == $_GET[plano_codigo] ? 'selected' : '') ?>>
+									<?= $option[codigo] ?>
+								</option>
+								<?
+							endforeach;
+							?>
+						</select>
 
-	</th>
+					</th>
 
 					<th rowspan="1" colspan="1">Continente<br>
 
@@ -124,7 +126,8 @@ endforeach;
 
 					</th>
 
-
+					<th rowspan="1" colspan="1">País<br><input type="text" class="filter" name="pais"
+							value="<?= $_GET['pais'] ?>"></th>
 
 					<th rowspan="1" colspan="1">Consumo Diário<br><input type="text" class="filter id" name="consumo"
 							value="<?= $_GET['consumo'] ?>"></th>
@@ -159,8 +162,7 @@ endforeach;
 							?>
 						</select>
 					</th>
-					<th rowspan="1" colspan="1">País<br><input type="text" class="filter" name="pais"
-							value="<?= $_GET['pais'] ?>"></th>
+
 					<th rowspan="1" colspan="1">Tipo<br>
 						<select name="a|ocorrencia" class="filter ">
 							<option value="">Selecione</option>
@@ -291,10 +293,15 @@ endforeach;
 						<td>
 							<?= $_item[plano] ?>
 						</td>
-						<td><?= $_item[plano_codigo] ?></td>
+						<td>
+							<?= $_item[plano_codigo] ?>
+						</td>
 
 						<td>
 							<?= $_item[continente] ?>
+						</td>
+						<td>
+							<?= $_item[pais] ?>
 						</td>
 						<td>
 							<?= $_item[consumo] ?>
@@ -341,9 +348,7 @@ endforeach;
 						<td>
 							<?= $_item[fornecedor_alias] ?>
 						</td>
-						<td>
-							<?= $_item[pais] ?>
-						</td>
+
 						<td>
 							<?= ($_item[ocorrencia] == 1 ? 'Venda' : 'Cortesia') ?>
 						</td>
