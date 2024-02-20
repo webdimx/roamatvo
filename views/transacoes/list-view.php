@@ -91,6 +91,23 @@ $_attributes = $model->getList($this->type);
 
 					</th>
 
+					<th rowspan="1" colspan="1">Opçao<br>
+
+						<select class="filter" name="codigo_opcao" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<option value=""></option>
+							<?
+							foreach ($modelConfig->getOptions('planos_opcoes', true) as $option):
+								?>
+								<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $_GET[ID] ? 'selected' : '') ?>>
+									<?= $option[nome] ?>
+								</option>
+								<?
+							endforeach;
+							?>
+						</select>
+
+					</th>
+
 					<th rowspan="1" colspan="1">Código do Plano<br>
 
 						<select class="filter" name="plano_codigo   class=" col-xs-12 col-sm-12 col-lg-12 required">
@@ -294,6 +311,9 @@ $_attributes = $model->getList($this->type);
 							<?= $_item[plano] ?>
 						</td>
 						<td>
+							<?= $_item[codigo_opcao] ?>
+						</td>
+						<td>
 							<?= $_item[plano_codigo] ?>
 						</td>
 
@@ -354,7 +374,7 @@ $_attributes = $model->getList($this->type);
 						</td>
 
 
-						<? //($_item[origem]==2?$_item[ponto_venda]:($_item[origem]==4?$_item[ponto_venda]:$_item[detalhe]))?>
+						<? //($_item[origem]==2?$_item[ponto_venda]:($_item[origem]==4?$_item[ponto_venda]:$_item[detalhe]))    ?>
 						<td>
 							<?= ($_item[origem] == 2 ? $_item[ponto_venda] : ($_item[origem] == 4 ? $_item[ponto_venda] : $_item[detalhe])) ?>
 						</td>
