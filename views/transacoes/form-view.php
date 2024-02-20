@@ -4,6 +4,9 @@ if ($this->action == 'edit'):
 endif;
 
 
+var_dump($data[plano_code]);
+
+
 ?>
 
 <div class="widget-box  page-box" id="cliente" style="opacity: 1;">
@@ -22,7 +25,8 @@ endif;
 					<div class="col-lg-5ths   hidden-lg hidden-sm">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Foto da Venda:</label><br>
-							<input type="file" id="id-input-file-2" name="file" data-path="professores" data-field="professores" value="<?= $data['foto'] ?>"/>
+							<input type="file" id="id-input-file-2" name="file" data-path="professores" data-field="professores"
+								value="<?= $data['foto'] ?>" />
 						</p>
 					</div>
 
@@ -59,8 +63,9 @@ endif;
 							<label class="control-label no-padding-right" for="form-field-1">SIMCARD/ICCID:</label><br>
 
 
-							<input type="text" name="<?= $this->controller ?>[iccid]" class="col-xs-12 col-sm-12 col-lg-12 auto-complete  required" value="<?= $data[iccid] ?>">
-							<div class="ui-widget-content"></div>
+							<input type="text" name="<?= $this->controller ?>[iccid]"
+								class="col-xs-12 col-sm-12 col-lg-12 auto-complete  required" value="<?= $data[iccid] ?>">
+						<div class="ui-widget-content"></div>
 
 						</p>
 					</div>
@@ -68,7 +73,8 @@ endif;
 					<div class="col-lg-5ths ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Fornecedor do SIMCARD:</label><br>
-							<select name="<?= $this->controller ?>[fornecedor_simcard]" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[fornecedor_simcard]"
+								class="col-xs-12 col-sm-12 col-lg-12 required">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('fornecedores', true) as $option):
@@ -87,7 +93,8 @@ endif;
 					<div class="col-lg-5ths ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">MDN:</label><br>
-							<input type="text" name="<?= $this->controller ?>[mdn]" class="col-xs-12 col-sm-12 col-lg-12   required" value="<?= $data[mdn] ?>">
+							<input type="text" name="<?= $this->controller ?>[mdn]" class="col-xs-12 col-sm-12 col-lg-12"
+								value="<?= $data[mdn] ?>">
 						</p>
 					</div>
 
@@ -99,7 +106,8 @@ endif;
 								<?
 								foreach ($modelConfig->getOptions('planos', true) as $option):
 									?>
-									<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data[plano] ? 'selected' : '') ?> data-local="<?= $option[local_uso] ?>" data-fornecedor="<?= $option[fornecedor] ?>">
+									<option value="<?= $option['ID'] ?>" <?= ($option['ID'] == $data[plano] ? 'selected' : '') ?>
+										data-local="<?= $option[local_uso] ?>" data-fornecedor="<?= $option[fornecedor] ?>">
 										<?= $option[nome] ?>
 									</option>
 									<?
@@ -112,7 +120,8 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Fornecedor do MDN:</label><br>
-							<select name="<?= $this->controller ?>[fornecedor_mdn]" class="col-xs-12 col-sm-12 col-lg-12 required <?= ($data[fornecedor_mdn] ? '' : '') ?>">
+							<select name="<?= $this->controller ?>[fornecedor_mdn]"
+								class="col-xs-12 col-sm-12 col-lg-12 required <?= ($data[fornecedor_mdn] ? '' : '') ?>">
 								<option value="" <?= ($data[fornecedor_mdn] ? '' : '') ?>>Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('fornecedores', true) as $option):
@@ -165,7 +174,8 @@ endif;
 					<div class="col-lg-3 ma mt" style="<?= ($data[tipo] == 4 || $data[tipo] == 5 ? '' : 'display: none') ?>">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Descrição do Motivo:</label><br>
-							<input type="text" name="<?= $this->controller ?>[descricao_motivo]" class="col-xs-12 col-sm-12 col-lg-12 " value="<?= $data[descricao_motivo] ?>">
+							<input type="text" name="<?= $this->controller ?>[descricao_motivo]"
+								class="col-xs-12 col-sm-12 col-lg-12 " value="<?= $data[descricao_motivo] ?>">
 						</p>
 					</div>
 
@@ -186,7 +196,8 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">N Determ:</label><br>
-							<select name="<?= $this->controller ?>[nota_d]" class="col-xs-12 col-sm-12 col-lg-12" <?= ($data[emitir_nota] ? 'disabled' : '') ?>>
+							<select name="<?= $this->controller ?>[nota_d]" class="col-xs-12 col-sm-12 col-lg-12"
+								<?= ($data[emitir_nota] ? 'disabled' : '') ?>>
 								<option value="">Selecione</option>
 								<option value="1" <?= ($data["nota_d"] == 1 ? 'selected' : '') ?>>A</option>
 								<option value="2" class="hidden" <?= ($data["nota_d"] == 2 ? 'selected' : '') ?>>S</option>
@@ -197,14 +208,18 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Data da Transação:</label><br>
-							<input type="text" name="<?= $this->controller ?>[data_transacao]" class="col-xs-12 col-sm-12 col-lg-12 required data date-picker " data-date-format="dd/mm/yyyy" value="<?= ($data[data_transacao] ? formatDate($data[data_transacao]) : date('d/m/Y')) ?>">
+							<input type="text" name="<?= $this->controller ?>[data_transacao]"
+								class="col-xs-12 col-sm-12 col-lg-12 required data date-picker " data-date-format="dd/mm/yyyy"
+								value="<?= ($data[data_transacao] ? formatDate($data[data_transacao]) : date('d/m/Y')) ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Data da Ativação:</label><br>
-							<input type="text" name="<?= $this->controller ?>[data_ativacao]" class="col-xs-12 col-sm-12 col-lg-12 required data date-picker " data-date-format="dd/mm/yyyy" value="<?= ($data[data_ativacao] ? formatDate($data[data_ativacao]) : date('d/m/Y')) ?>">
+							<input type="text" name="<?= $this->controller ?>[data_ativacao]"
+								class="col-xs-12 col-sm-12 col-lg-12 required data date-picker " data-date-format="dd/mm/yyyy"
+								value="<?= ($data[data_ativacao] ? formatDate($data[data_ativacao]) : date('d/m/Y')) ?>">
 						</p>
 					</div>
 
@@ -212,7 +227,7 @@ endif;
 					<div class="col-lg-3">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Atendente:</label><br>
-							<select name="<?= $this->controller ?>[atendente]" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[atendente]" class="col-xs-12 col-sm-12 col-lg-12">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('atendentes', true) as $option):
@@ -230,7 +245,8 @@ endif;
 					<div class="col-lg-3">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Local da Venda:</label><br>
-							<select name="<?= $this->controller ?>[local_venda]" data-pontos="" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[local_venda]" data-pontos=""
+								class="col-xs-12 col-sm-12 col-lg-12 required">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('local_de_venda', true) as $option):
@@ -248,7 +264,7 @@ endif;
 					<div class="col-lg-3">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Ponto de Venda/Entrega:</label><br>
-							<select name="<?= $this->controller ?>[ponto_venda]" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[ponto_venda]" class="col-xs-12 col-sm-12 col-lg-12 ">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('ponto_de_venda', true) as $option):
@@ -267,35 +283,40 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Nome do Cliente:</label><br>
-							<input type="text" name="<?= $this->controller ?>[nome]" class="col-xs-12 col-sm-12 col-lg-12   required" value="<?= $data[nome] ?>">
+							<input type="text" name="<?= $this->controller ?>[nome]" class="col-xs-12 col-sm-12 col-lg-12   required"
+								value="<?= $data[nome] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Celular:</label><br>
-							<input type="text" name="<?= $this->controller ?>[celular]" class="col-xs-12 col-sm-12 col-lg-12 celular" value="<?= $data[celular] ?>">
+							<input type="text" name="<?= $this->controller ?>[celular]" class="col-xs-12 col-sm-12 col-lg-12 celular"
+								value="<?= $data[celular] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">E-mail:</label><br>
-							<input type="text" name="<?= $this->controller ?>[email]" class="col-xs-12 col-sm-12 col-lg-12" value="<?= $data[email] ?>">
+							<input type="text" name="<?= $this->controller ?>[email]" class="col-xs-12 col-sm-12 col-lg-12"
+								value="<?= $data[email] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">CPF:</label><br>
-							<input type="text" name="<?= $this->controller ?>[documento]" class="col-xs-12 cpf col-sm-12 col-lg-12" value="<?= $data[documento] ?>">
+							<input type="text" name="<?= $this->controller ?>[documento]" class="col-xs-12 cpf col-sm-12 col-lg-12"
+								value="<?= $data[documento] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">CNPJ:</label><br>
-							<input type="text" name="<?= $this->controller ?>[cnpj]" class="col-xs-12 cnpj col-sm-12 col-lg-12" value="<?= $data[cnpj] ?>">
+							<input type="text" name="<?= $this->controller ?>[cnpj]" class="col-xs-12 cnpj col-sm-12 col-lg-12"
+								value="<?= $data[cnpj] ?>">
 						</p>
 					</div>
 
@@ -303,7 +324,7 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Local de Uso:</label><br>
-							<select name="<?= $this->controller ?>[local_uso]" id="plano" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[local_uso]" id="plano" class="col-xs-12 col-sm-12 col-lg-12 ">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('local_de_uso', true) as $option):
@@ -321,14 +342,17 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Dias de Uso:</label><br>
-							<input type="text" name="<?= $this->controller ?>[dias_uso]" class="col-xs-12 col-sm-12 col-lg-12   required" value="<?= $data[dias_uso] ?>" readonly>
+							<input type="text" name="<?= $this->controller ?>[dias_uso]"
+								class="col-xs-12 col-sm-12 col-lg-12   required" value="<?= $data[dias_uso] ?>" readonly>
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Data Off:</label><br>
-							<input type="text" name="<?= $this->controller ?>[data_off]" class="col-xs-12 col-sm-12 col-lg-12 required" data-date-format="dd/mm/yyyy" value="<?= ($data[data_off] ? formatDate($data[data_off]) : '') ?>" readonly>
+							<input type="text" name="<?= $this->controller ?>[data_off]"
+								class="col-xs-12 col-sm-12 col-lg-12 required" data-date-format="dd/mm/yyyy"
+								value="<?= ($data[data_off] ? formatDate($data[data_off]) : '') ?>" readonly>
 						</p>
 					</div>
 
@@ -367,7 +391,8 @@ endif;
 					<div class="col-lg-3 a-value " style="display: none">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor:</label><br>
-							<input type="text" name="<?= $this->controller ?>[adiar_valor]" class="col-xs-12 col-sm-12 col-lg-12 moneyUSD " value="<?= $data[adiar_valor] ?>">
+							<input type="text" name="<?= $this->controller ?>[adiar_valor]"
+								class="col-xs-12 col-sm-12 col-lg-12 moneyUSD " value="<?= $data[adiar_valor] ?>">
 						</p>
 					</div>
 
@@ -388,14 +413,16 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor do Plano USD:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_plano]" class="col-xs-12 col-sm-12 col-lg-12 moneyUSD required" readonly value="<?= $data[valor_plano] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_plano]"
+								class="col-xs-12 col-sm-12 col-lg-12 moneyUSD" readonly value="<?= $data[valor_plano] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Forma de Pagamento:</label><br>
-							<select name="<?= $this->controller ?>[forma_pagamento]" id="fp" class="col-xs-12 col-sm-12 col-lg-12 required <?= ($data[forma_pagamento] ? 'disabled' : '') ?>">
+							<select name="<?= $this->controller ?>[forma_pagamento]" id="fp"
+								class="col-xs-12 col-sm-12 col-lg-12 <?= ($data[forma_pagamento] ? 'disabled' : '') ?>">
 								<option value="" <?= ($data[forma_pagamento] ? 'disabled' : '') ?>>Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('formas_pagamento', true) as $option):
@@ -413,7 +440,7 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Moeda:</label><br>
-							<select name="<?= $this->controller ?>[moeda]" class="col-xs-12 col-sm-12 col-lg-12 required">
+							<select name="<?= $this->controller ?>[moeda]" class="col-xs-12 col-sm-12 col-lg-12 ">
 								<option value="">Selecione</option>
 								<?
 								foreach ($modelConfig->getOptions('moedas', true) as $option):
@@ -431,49 +458,56 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Desconto:</label><br>
-							<input type="text" name="<?= $this->controller ?>[desconto]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[desconto] ?>">
+							<input type="text" name="<?= $this->controller ?>[desconto]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[desconto] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Recebido em Dólar:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_dolar]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_dolar] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_dolar]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_dolar] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Recebido em Euro:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_euro]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_euro] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_euro]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_euro] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Recebido em Real:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_real]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_real] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_real]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_real] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Recebido em Débito:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_debito]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_debito] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_debito]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_debito] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Recebido em Crédito:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_credito]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_credito] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_credito]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD" value="<?= $data[valor_credito] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Valor Pago:</label><br>
-							<input type="text" name="<?= $this->controller ?>[valor_pago]" class="col-xs-12 col-sm-12 col-lg-12  moneyUSD required" value="<?= $data[valor_pago] ?>">
+							<input type="text" name="<?= $this->controller ?>[valor_pago]"
+								class="col-xs-12 col-sm-12 col-lg-12  moneyUSD required" value="<?= $data[valor_pago] ?>">
 						</p>
 					</div>
 
@@ -481,7 +515,8 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Aparelho:</label><br>
-							<input type="text" name="<?= $this->controller ?>[aparelhos]" class="col-xs-12 col-sm-12 col-lg-12" value="<?= $data[aparelhos] ?>">
+							<input type="text" name="<?= $this->controller ?>[aparelhos]" class="col-xs-12 col-sm-12 col-lg-12"
+								value="<?= $data[aparelhos] ?>">
 						</p>
 					</div>
 
@@ -489,14 +524,16 @@ endif;
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Países Informados:</label><br>
-							<input type="text" name="<?= $this->controller ?>[paises]" class="col-xs-12 col-sm-12 col-lg-12" value="<?= $data[paises] ?>">
+							<input type="text" name="<?= $this->controller ?>[paises]" class="col-xs-12 col-sm-12 col-lg-12"
+								value="<?= $data[paises] ?>">
 						</p>
 					</div>
 
 					<div class="col-lg-3 ">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Voucher:</label><br>
-							<input type="text" name="<?= $this->controller ?>[voucher]" class="col-xs-12 col-sm-12 col-lg-12" value="<?= $data[voucher] ?>">
+							<input type="text" name="<?= $this->controller ?>[voucher]" class="col-xs-12 col-sm-12 col-lg-12"
+								value="<?= $data[voucher] ?>">
 						</p>
 					</div>
 
@@ -504,7 +541,8 @@ endif;
 					<div class="col-lg-12 col-xs-12">
 						<p>
 							<label class="control-label no-padding-right" for="form-field-1">Observações:</label><br>
-							<textarea name="<?= $this->controller ?>[observacao]" class="col-xs-12 col-sm-12 col-lg-12 " style="height:60px"><?= $data[observacao] ?></textarea>
+							<textarea name="<?= $this->controller ?>[observacao]" class="col-xs-12 col-sm-12 col-lg-12 "
+								style="height:60px"><?= $data[observacao] ?></textarea>
 						</p>
 					</div>
 
