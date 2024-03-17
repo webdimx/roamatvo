@@ -235,7 +235,8 @@ endif;
 
     $('body').on('click', '.add', function () {
       let clone = $('.item:last-child').clone()
-      clone.find('input').val('')
+      clone.find('input[type=text]').val('')
+      clone.find('input[type=radio]').prop('checked', false)
       $('.item-list').append(clone)
 
     })

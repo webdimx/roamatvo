@@ -110,13 +110,13 @@ $_attributes = $model->getList($this->type);
 
 					<th rowspan="1" colspan="1">Código do Plano<br>
 
-						<select class="filter" name="plano_codigo   class=" col-xs-12 col-sm-12 col-lg-12 required">
+						<select class="filter" name="b|codigo_plano"   class=" col-xs-12 col-sm-12 col-lg-12 required">
 							<option value=""></option>
 							<?
 							foreach ($modelConfig->getOptions('planos', true) as $option):
 								?>
-								<option value="<?= $option['codigo'] ?>" <?= ($option['codigo'] == $_GET[plano_codigo] ? 'selected' : '') ?>>
-									<?= $option[codigo] ?>
+								<option value="<?= $option['codigo_plano'] ?>" <?= ($option['codigo_plano'] == $_GET["b|codigo_plano"] ? 'selected' : '') ?>>
+									<?= $option[codigo_plano] ?>
 								</option>
 								<?
 							endforeach;
@@ -143,8 +143,8 @@ $_attributes = $model->getList($this->type);
 
 					</th>
 
-					<th rowspan="1" colspan="1">País<br><input type="text" class="filter" name="pais"
-							value="<?= $_GET['pais'] ?>"></th>
+					<th rowspan="1" colspan="1">País Origem<br><input type="text" class="filter" name="pais_origem"
+							value="<?= $_GET['pais_origem'] ?>"></th>
 
 					<th rowspan="1" colspan="1">Consumo Diário<br><input type="text" class="filter id" name="consumo"
 							value="<?= $_GET['consumo'] ?>"></th>
@@ -199,7 +199,8 @@ $_attributes = $model->getList($this->type);
 						</select>
 					</th>
 
-
+					<th rowspan="1" colspan="1">País <br><input type="text" class="filter" name="pais"
+							value="<?= $_GET['pais'] ?>"></th>
 
 					<th rowspan="1" colspan="1">Status<br>
 						<select class="filter" name="a|status" class="col-xs-12 col-sm-12 col-lg-12 required">
@@ -321,7 +322,7 @@ $_attributes = $model->getList($this->type);
 							<?= $_item[continente] ?>
 						</td>
 						<td>
-							<?= $_item[pais] ?>
+							<?= $_item[pais_origem] ?>
 						</td>
 						<td>
 							<?= $_item[consumo] ?>
@@ -378,6 +379,11 @@ $_attributes = $model->getList($this->type);
 						<td>
 							<?= ($_item[origem] == 2 ? $_item[ponto_venda] : ($_item[origem] == 4 ? $_item[ponto_venda] : $_item[detalhe])) ?>
 						</td>
+
+						<td>
+							<?= $_item[pais] ?>
+						</td>
+
 						<td>
 
 							<?

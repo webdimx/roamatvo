@@ -102,6 +102,7 @@ class ApiModel extends MainController
 			'name',
 			'simcard',
 			'country',
+			'country_origin',
 			'activation_date',
 			'days',
 			'email',
